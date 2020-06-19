@@ -26,6 +26,14 @@
 @base-pre-border-radius:                        3px;
 
 
+//UAB Overrides 
+@base-heading-color:                            @global-color;
+@base-link-text-decoration:                     underline;
+
+@base-em-color:                                 @global-color;
+@base-code-color:                               @global-color;
+
+
 // Body
 // ========================================================================
 
@@ -37,6 +45,7 @@
 
 
     .hook-base-link() {
+        text-decoration-color: @global-campus-green;
     }
 
 
@@ -57,17 +66,51 @@
 
 .hook-base-heading() {}
 
-.hook-base-h1() {}
+.hook-base-h1() {
+  
+    font-weight:@global-font-weight-kulturista-semi-bold;
+    font-family:@global-font-kulturista;
+    text-transform:uppercase;
+}
 
-.hook-base-h2() {}
 
-.hook-base-h3() {}
 
-.hook-base-h4() {}
+.hook-base-h2() {
+ 
+    font-weight: @global-font-weight-proxima-semi-bold;
+    font-family:@global-font-proxima;
+}
 
-.hook-base-h5() {}
 
-.hook-base-h6() {}
+.hook-base-h3() {
+  
+    font-weight:@global-font-weight-proxima-medium;
+    font-family:@global-font-proxima;
+}
+
+.hook-base-h4() {
+ 
+    font-weight:@global-font-weight-kulturista-medium;
+    font-family:@global-font-kulturista;
+}
+
+.hook-base-h5() {
+  
+    font-family:@global-font-proxima;
+}
+
+.hook-base-h6() {
+  
+    font-family:@global-font-proxima;
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    h1, .uk-h1 { font-size: @global-xlarge-font-size; }
+    h2, .uk-h2 { font-size: @global-xlarge-font-size; }
+
+}
 
 
 // Horizontal rules
@@ -120,6 +163,7 @@
 
 .hook-inverse-base-code() {
     background: @inverse-global-muted-background;
+  
 }
 
 .hook-inverse-base-heading() {}

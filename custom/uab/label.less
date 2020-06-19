@@ -7,6 +7,14 @@
 // Variables
 // ========================================================================
 
+@label-success-background:                      @global-light-yellow;
+@label-success-color:                           @global-color;
+@label-warning-background:                      @global-choral;
+@label-warning-color:                           @global-inverse-color;
+@label-danger-background:                       @global-danger-background;
+@label-danger-color:                            @global-color;
+
+
 //
 // New
 //
@@ -31,7 +39,9 @@
 
 .hook-label-warning() {}
 
-.hook-label-danger() {}
+.hook-label-danger() {
+    border: @global-border-width solid @global-campus-green;
+}
 
 
 // Miscellaneous

@@ -15,6 +15,23 @@
 @alert-close-hover-opacity:                     0.8;
 
 
+//UAB Overrides 
+
+@alert-background:                              @global-light-gray;
+@alert-color:                                   @global-color;
+
+@alert-primary-background:                      @global-primary-background;
+@alert-primary-color:                           @global-inverse-color;
+
+@alert-success-background:                      @global-light-yellow;
+@alert-success-color:                           @global-color;
+
+@alert-warning-background:                      @global-choral;
+@alert-warning-color:                           @global-inverse-color;
+
+@alert-danger-background:                       @global-inverse-color;
+@alert-danger-color:                            @global-color;
+
 // Component
 // ========================================================================
 
@@ -44,7 +61,9 @@
 
 .hook-alert-warning() {}
 
-.hook-alert-danger() {}
+.hook-alert-danger() {
+    border:@global-border-width solid @global-campus-green;
+}
 
 
 // Miscellaneous
