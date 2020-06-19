@@ -7,9 +7,9 @@
 // Variables
 // ========================================================================
 
-@table-header-cell-font-size:                   @global-small-font-size;
-@table-header-cell-font-weight:                 normal;
-@table-header-cell-color:                       @global-muted-color;
+@table-header-cell-font-size:                   @global-font-size;
+@table-header-cell-font-weight:                 @global-font-weight-proxima-semi-bold;
+@table-header-cell-color:                       @global-color;
 
 //
 // New
@@ -18,15 +18,26 @@
 @table-striped-border-width:                    @global-border-width;
 @table-striped-border:                          @global-border;
 
+//UAB Overides 
+
+@table-row-active-background:                   @global-light-gray;
+
+@table-divider-border:                          @global-uab-green;
+@table-striped-row-background:                  @global-muted-background;
+@table-hover-row-background:                    @table-row-active-background;
+@table-footer-font-size:                        @global-font-size;
 
 // Component
 // ========================================================================
 
-.hook-table-header-cell() { text-transform: uppercase; }
+.hook-table-header-cell() {  }
 
 .hook-table-cell() {}
 
-.hook-table-footer() {  }
+.hook-table-footer() {  
+    border-top: 1px solid #80bc00;
+    font-weight:@global-font-weight-proxima-semi-bold;
+}
 
 .hook-table-caption() {}
 
@@ -42,6 +53,12 @@
     border-top: @table-striped-border-width solid @table-striped-border;
     border-bottom: @table-striped-border-width solid @table-striped-border;
 }
+
+.uk-table-striped th {
+        background-color:@global-uab-green;
+        color:@global-inverse-color;
+    }
+
 
 .hook-table-hover() {}
 
