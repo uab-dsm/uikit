@@ -27,8 +27,12 @@
 
 
 //UAB Overrides 
-
+@base-heading-color:                            @global-color;
 @base-link-text-decoration:                     underline;
+
+@base-em-color:                                 @global-color;
+@base-code-color:                               @global-color;
+
 
 // Body
 // ========================================================================
@@ -159,6 +163,7 @@
 
 .hook-inverse-base-code() {
     background: @inverse-global-muted-background;
+  
 }
 
 .hook-inverse-base-heading() {}
