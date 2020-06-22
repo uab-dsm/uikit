@@ -11,6 +11,9 @@
 @button-small-line-height:                      @global-control-small-height - (@button-border-width * 2);
 @button-large-line-height:                      @global-control-large-height - (@button-border-width * 2);
 
+
+
+
 @button-font-size:                              @global-small-font-size;
 @button-large-font-size:                        @global-small-font-size;
 
@@ -41,13 +44,29 @@
 @button-text-border:                            @button-text-hover-color;
 
 
+//UAB Overrides 
+
+
+
+@button-small-padding-vertical:               5px;
+@button-padding-vertical:                     10px;
+@button-large-padding-vertical:               15px;
+
+
+@button-line-height:                            inherit;
+@button-small-line-height:                      inherit;
+@button-large-line-height:                      inherit;
+
+
+
 // Component
 // ========================================================================
 
 .hook-button() {
-    text-transform: @button-text-transform;
+    // text-transform: @button-text-transform;
     transition: 0.1s ease-in-out;
     transition-property: color, background-color, border-color;
+    padding: @button-padding-vertical @button-padding-horizontal;
 }
 
 .hook-button-hover() {}
@@ -114,9 +133,13 @@
 // Size modifiers
 // ========================================================================
 
-.hook-button-small() {}
+.hook-button-small() {
+    padding: @button-small-padding-vertical @button-padding-horizontal;
+}
 
-.hook-button-large() {}
+.hook-button-large() {
+    padding: @button-large-padding-vertical @button-padding-horizontal;
+}
 
 
 // Text modifier
