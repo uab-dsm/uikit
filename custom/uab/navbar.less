@@ -20,7 +20,7 @@
 
 @navbar-nav-item-text-transform:                uppercase;
 
-@navbar-dropdown-nav-font-size:                 @global-small-font-size;
+@navbar-dropdown-nav-font-size:                 .95rem;
 
 @navbar-dropdown-box-shadow:                    0 5px 12px rgba(0,0,0,0.15);
 
@@ -31,6 +31,8 @@
 
 
 //UAB Overrides 
+
+@navbar-nav-item-font-size:                     @global-font-size;
 
 @navbar-background:                             @global-light-gray;
 
@@ -127,6 +129,7 @@
 
 .hook-navbar-dropdown() { 
     // box-shadow: @navbar-dropdown-box-shadow; 
+
 }
 
 .hook-navbar-dropdown-dropbar() { box-shadow: none; }
@@ -135,7 +138,11 @@
 // Dropdown nav
 // ========================================================================
 
-.hook-navbar-dropdown-nav() { font-size: @navbar-dropdown-nav-font-size; }
+.hook-navbar-dropdown-nav() { 
+    // font-size: @navbar-dropdown-nav-font-size;
+    line-height: 1.1; 
+    margin-bottom:15px;
+}
 
 .hook-navbar-dropdown-nav-item() {}
 
@@ -211,3 +218,8 @@
 .hook-inverse-navbar-toggle-hover() {}
 
 
+//UAB Additions 
+
+    .uk-navbar-dropdown .uab-nav li {
+        margin-top:15px;
+    }
