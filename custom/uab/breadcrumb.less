@@ -8,6 +8,10 @@
 // ========================================================================
 
 
+//UAB Overrides 
+
+@breadcrumb-divider-margin-horizontal:              5px;
+
 // Component
 // ========================================================================
 
@@ -17,7 +21,9 @@
 // Items
 // ========================================================================
 
-.hook-breadcrumb-item() {}
+.hook-breadcrumb-item() {
+    text-decoration:none;
+}
 
 .hook-breadcrumb-item-hover() {}
 
@@ -25,7 +31,11 @@
 
 .hook-breadcrumb-item-active() {}
 
-.hook-breadcrumb-divider() {}
+.hook-breadcrumb-divider() {
+
+    font-family: 'fontAwesome';
+    content: "\f105";
+}
 
 
 // Miscellaneous
@@ -42,4 +52,8 @@
 .hook-inverse-breadcrumb-item-disabled() {}
 .hook-inverse-breadcrumb-item-active() {}
 
-.hook-inverse-breadcrumb-divider() {}
+.hook-inverse-breadcrumb-divider() {
+
+  
+
+}

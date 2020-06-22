@@ -9,9 +9,9 @@
 
 @navbar-nav-item-font-size:                     @global-small-font-size;
 
-@navbar-dropdown-margin:                        15px;
+// @navbar-dropdown-margin:                        15px;
 @navbar-dropdown-padding:                       25px;
-@navbar-dropdown-background:                    @global-background;
+@navbar-dropdown-background:                    @global-light-gray;
 @navbar-dropdown-grid-gutter-horizontal:        (@navbar-dropdown-padding * 2);
 
 //
@@ -29,6 +29,26 @@
 @navbar-dropdown-grid-divider-border-width:     @global-border-width;
 @navbar-dropdown-grid-divider-border:           @navbar-dropdown-nav-divider-border;
 
+
+//UAB Overrides 
+
+@navbar-background:                             @global-light-gray;
+
+@navbar-nav-item-height:                        50px;
+
+@navbar-dropdown-nav-item-color:                @global-color;
+@navbar-nav-item-color:                         @global-color;
+
+
+@navbar-dropdown-nav-item-active-color:         @global-color;
+@navbar-dropdown-nav-header-color:              @global-color;
+
+
+@navbar-dropdown-nav-sublist-item-color:        @global-color;
+
+@navbar-nav-item-onclick-color:                 @global-inverse-color;
+
+@navbar-nav-item-active-color:                  @global-color;
 
 // Component
 // ========================================================================
@@ -51,12 +71,22 @@
     transition-property: color, background-color;
 }
 
-.hook-navbar-nav-item-hover() {}
+.hook-navbar-nav-item-hover() {
+    background-color:@global-uab-green;
+    color:@global-inverse-color;
+}
 
 .hook-navbar-nav-item-onclick() {}
 
-.hook-navbar-nav-item-active() {}
+.hook-navbar-nav-item-active() {
+   
+}
 
+//UAB Additions
+
+.uk-navbar-nav > li.uk-active > a:hover {
+    color:#fff;
+}
 
 // Item
 // ========================================================================
@@ -95,7 +125,9 @@
 // Dropdown
 // ========================================================================
 
-.hook-navbar-dropdown() { box-shadow: @navbar-dropdown-box-shadow; }
+.hook-navbar-dropdown() { 
+    // box-shadow: @navbar-dropdown-box-shadow; 
+}
 
 .hook-navbar-dropdown-dropbar() { box-shadow: none; }
 
@@ -177,3 +209,5 @@
 
 .hook-inverse-navbar-toggle() {}
 .hook-inverse-navbar-toggle-hover() {}
+
+

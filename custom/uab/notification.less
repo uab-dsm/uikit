@@ -29,13 +29,26 @@
 // Style modifiers
 // ========================================================================
 
-.hook-notification-message-primary() {}
+.hook-notification-message-primary() {
+    color:@global-inverse-color;
+    background-color:@notification-message-primary-color;
+}
 
-.hook-notification-message-success() {}
+.hook-notification-message-success() {
+    color:@global-color;
+    background-color:@notification-message-success-color;
+}
 
-.hook-notification-message-warning() {}
+.hook-notification-message-warning() {
+    color:@global-inverse-color;
+    background-color:@notification-message-warning-color;
+}
 
-.hook-notification-message-danger() {}
+.hook-notification-message-danger() {
+    color:@global-color;
+    background-color:@notification-message-danger-color;
+    border:@global-border-width solid @global-campus-green;
+}
 
 
 // Miscellaneous
