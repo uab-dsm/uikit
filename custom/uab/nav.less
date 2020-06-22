@@ -29,9 +29,9 @@
 
 @nav-default-sublist-item-color:                @global-color;
 
+@nav-header-font-size:                          @global-font-size;
 
-
-
+@nav-header-text-transform:                     initial;
 
 
 @nav-sublist-padding-vertical:                  5px;
@@ -54,7 +54,10 @@
 // Header
 // ========================================================================
 
-.hook-nav-header() {}
+.hook-nav-header() {
+        text-transform:initial;
+       font-weight: @global-font-weight-proxima-semi-bold;
+}
 
 
 // Divider
