@@ -18,7 +18,7 @@
 // New
 //
 
-@navbar-nav-item-text-transform:                uppercase;
+@navbar-nav-item-text-transform:                initial;
 
 @navbar-dropdown-nav-font-size:                 .95rem;
 
@@ -52,6 +52,8 @@
 
 @navbar-nav-item-active-color:                  @global-color;
 
+@navbar-nav-item-padding-horizontal:            5px;
+
 // Component
 // ========================================================================
 
@@ -71,6 +73,8 @@
     text-transform: @navbar-nav-item-text-transform;
     transition: 0.1s ease-in-out;
     transition-property: color, background-color;
+    text-align:center;
+    line-height:1.2;
 }
 
 .hook-navbar-nav-item-hover() {
@@ -148,7 +152,9 @@
 
 .hook-navbar-dropdown-nav-item-hover() {}
 
-.hook-navbar-dropdown-nav-header() {}
+.hook-navbar-dropdown-nav-header() {
+    
+}
 
 .hook-navbar-dropdown-nav-divider() {}
 
