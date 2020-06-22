@@ -1,9 +1,9 @@
-/*! UIkit 3.5.4 | https://www.getuikit.com | (c) 2014 - 2020 YOOtheme | MIT License */
+/*! uabUIkit 3.5.4 | https://www.getuikit.com | (c) 2014 - 2020 YOOtheme | MIT License */
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define('uikit', factory) :
-    (global = global || self, global.UIkit = factory());
+    (global = global || self, global.uabUIkit = factory());
 }(this, (function () { 'use strict';
 
     var objPrototype = Object.prototype;
@@ -489,7 +489,7 @@
                 }
 
                 if (!ctx.id) {
-                    ctx.id = "uk-" + (Date.now()) + i;
+                    ctx.id = "uab-" + (Date.now()) + i;
                     removes.push(function () { return removeAttr(ctx, 'id'); });
                 }
 
@@ -1430,16 +1430,16 @@
         var docEl = document.documentElement;
 
         if (!isIE) {
-            return getStyles(docEl).getPropertyValue(("--uk-" + name));
+            return getStyles(docEl).getPropertyValue(("--uab-" + name));
         }
 
         if (!(name in vars)) {
 
-            /* usage in css: .uk-name:before { content:"xyz" } */
+            /* usage in css: .uab-name:before { content:"xyz" } */
 
             var element = append(docEl, document.createElement('div'));
 
-            addClass(element, ("uk-" + name));
+            addClass(element, ("uab-" + name));
 
             vars[name] = getStyle(element, 'content', ':before').replace(/^["'](.*)["']$/, '$1');
 
@@ -1505,7 +1505,7 @@
                     var type = ref.type;
 
                     clearTimeout(timer);
-                    removeClass(element, 'uk-transition');
+                    removeClass(element, 'uab-transition');
                     css(element, {
                         transitionProperty: '',
                         transitionDuration: '',
@@ -1514,7 +1514,7 @@
                     type === 'transitioncanceled' ? reject() : resolve();
                 }, {self: true});
 
-                addClass(element, 'uk-transition');
+                addClass(element, 'uab-transition');
                 css(element, assign({
                     transitionProperty: Object.keys(props).map(propName).join(','),
                     transitionDuration: (duration + "ms"),
@@ -1540,12 +1540,12 @@
         },
 
         inProgress: function(element) {
-            return hasClass(element, 'uk-transition');
+            return hasClass(element, 'uab-transition');
         }
 
     };
 
-    var animationPrefix = 'uk-animation-';
+    var animationPrefix = 'uab-animation-';
 
     function animate(element, animation, duration, origin, out) {
         if ( duration === void 0 ) duration = 200;
@@ -1573,7 +1573,7 @@
                 addClass(element, animation, animationPrefix + (out ? 'leave' : 'enter'));
 
                 if (startsWith(animation, animationPrefix)) {
-                    addClass(element, origin && ("uk-transform-origin-" + origin), out && (animationPrefix + "reverse"));
+                    addClass(element, origin && ("uab-transform-origin-" + origin), out && (animationPrefix + "reverse"));
                 }
 
             }); }
@@ -2780,11 +2780,11 @@
         getViewport: getViewport
     });
 
-    function globalAPI (UIkit) {
+    function globalAPI (uabUIkit) {
 
-        var DATA = UIkit.data;
+        var DATA = uabUIkit.data;
 
-        UIkit.use = function (plugin) {
+        uabUIkit.use = function (plugin) {
 
             if (plugin.installed) {
                 return;
@@ -2796,17 +2796,17 @@
             return this;
         };
 
-        UIkit.mixin = function (mixin, component) {
-            component = (isString(component) ? UIkit.component(component) : component) || this;
+        uabUIkit.mixin = function (mixin, component) {
+            component = (isString(component) ? uabUIkit.component(component) : component) || this;
             component.options = mergeOptions(component.options, mixin);
         };
 
-        UIkit.extend = function (options) {
+        uabUIkit.extend = function (options) {
 
             options = options || {};
 
             var Super = this;
-            var Sub = function UIkitComponent(options) {
+            var Sub = function uabUIkitComponent(options) {
                 this._init(options);
             };
 
@@ -2820,7 +2820,7 @@
             return Sub;
         };
 
-        UIkit.update = function (element, e) {
+        uabUIkit.update = function (element, e) {
 
             element = element ? toNode(element) : document.body;
 
@@ -2830,7 +2830,7 @@
         };
 
         var container;
-        Object.defineProperty(UIkit, 'container', {
+        Object.defineProperty(uabUIkit, 'container', {
 
             get: function() {
                 return container || document.body;
@@ -2857,9 +2857,9 @@
         }
     }
 
-    function hooksAPI (UIkit) {
+    function hooksAPI (uabUIkit) {
 
-        UIkit.prototype._callHook = function (hook) {
+        uabUIkit.prototype._callHook = function (hook) {
             var this$1 = this;
 
 
@@ -2870,7 +2870,7 @@
             }
         };
 
-        UIkit.prototype._callConnected = function () {
+        uabUIkit.prototype._callConnected = function () {
 
             if (this._connected) {
                 return;
@@ -2892,7 +2892,7 @@
             this._callUpdate();
         };
 
-        UIkit.prototype._callDisconnected = function () {
+        uabUIkit.prototype._callDisconnected = function () {
 
             if (!this._connected) {
                 return;
@@ -2912,7 +2912,7 @@
 
         };
 
-        UIkit.prototype._callUpdate = function (e) {
+        uabUIkit.prototype._callUpdate = function (e) {
             var this$1 = this;
             if ( e === void 0 ) e = 'update';
 
@@ -2963,7 +2963,7 @@
 
         };
 
-        UIkit.prototype._callWatches = function () {
+        uabUIkit.prototype._callWatches = function () {
             var this$1 = this;
 
 
@@ -3013,11 +3013,11 @@
 
     }
 
-    function stateAPI (UIkit) {
+    function stateAPI (uabUIkit) {
 
         var uid = 0;
 
-        UIkit.prototype._init = function (options) {
+        uabUIkit.prototype._init = function (options) {
 
             options = options || {};
             options.data = normalizeData(options, this.constructor.options);
@@ -3037,7 +3037,7 @@
             }
         };
 
-        UIkit.prototype._initData = function () {
+        uabUIkit.prototype._initData = function () {
 
             var ref = this.$options;
             var data = ref.data; if ( data === void 0 ) data = {};
@@ -3047,7 +3047,7 @@
             }
         };
 
-        UIkit.prototype._initMethods = function () {
+        uabUIkit.prototype._initMethods = function () {
 
             var ref = this.$options;
             var methods = ref.methods;
@@ -3059,7 +3059,7 @@
             }
         };
 
-        UIkit.prototype._initComputeds = function () {
+        uabUIkit.prototype._initComputeds = function () {
 
             var ref = this.$options;
             var computed = ref.computed;
@@ -3073,7 +3073,7 @@
             }
         };
 
-        UIkit.prototype._initProps = function (props) {
+        uabUIkit.prototype._initProps = function (props) {
 
             var key;
 
@@ -3093,7 +3093,7 @@
             }
         };
 
-        UIkit.prototype._initEvents = function () {
+        uabUIkit.prototype._initEvents = function () {
             var this$1 = this;
 
 
@@ -3118,12 +3118,12 @@
             }
         };
 
-        UIkit.prototype._unbindEvents = function () {
+        uabUIkit.prototype._unbindEvents = function () {
             this._events.forEach(function (unbind) { return unbind(); });
             delete this._events;
         };
 
-        UIkit.prototype._initObserver = function () {
+        uabUIkit.prototype._initObserver = function () {
             var this$1 = this;
 
 
@@ -3326,15 +3326,15 @@
         }
     }
 
-    function instanceAPI (UIkit) {
+    function instanceAPI (uabUIkit) {
 
-        var DATA = UIkit.data;
+        var DATA = uabUIkit.data;
 
-        UIkit.prototype.$create = function (component, element, data) {
-            return UIkit[component](element, data);
+        uabUIkit.prototype.$create = function (component, element, data) {
+            return uabUIkit[component](element, data);
         };
 
-        UIkit.prototype.$mount = function (el) {
+        uabUIkit.prototype.$mount = function (el) {
 
             var ref = this.$options;
             var name = ref.name;
@@ -3356,12 +3356,12 @@
             }
         };
 
-        UIkit.prototype.$reset = function () {
+        uabUIkit.prototype.$reset = function () {
             this._callDisconnected();
             this._callConnected();
         };
 
-        UIkit.prototype.$destroy = function (removeEl) {
+        uabUIkit.prototype.$destroy = function (removeEl) {
             if ( removeEl === void 0 ) removeEl = false;
 
 
@@ -3390,22 +3390,22 @@
             }
         };
 
-        UIkit.prototype.$emit = function (e) {
+        uabUIkit.prototype.$emit = function (e) {
             this._callUpdate(e);
         };
 
-        UIkit.prototype.$update = function (element, e) {
+        uabUIkit.prototype.$update = function (element, e) {
             if ( element === void 0 ) element = this.$el;
 
-            UIkit.update(element, e);
+            uabUIkit.update(element, e);
         };
 
-        UIkit.prototype.$getComponent = UIkit.getComponent;
+        uabUIkit.prototype.$getComponent = uabUIkit.getComponent;
 
         var names = {};
-        Object.defineProperties(UIkit.prototype, {
+        Object.defineProperties(uabUIkit.prototype, {
 
-            $container: Object.getOwnPropertyDescriptor(UIkit, 'container'),
+            $container: Object.getOwnPropertyDescriptor(uabUIkit, 'container'),
 
             $name: {
 
@@ -3414,7 +3414,7 @@
                     var name = ref.name;
 
                     if (!names[name]) {
-                        names[name] = UIkit.prefix + hyphenate(name);
+                        names[name] = uabUIkit.prefix + hyphenate(name);
                     }
 
                     return names[name];
@@ -3426,13 +3426,13 @@
 
     }
 
-    function componentAPI (UIkit) {
+    function componentAPI (uabUIkit) {
 
-        var DATA = UIkit.data;
+        var DATA = uabUIkit.data;
 
         var components = {};
 
-        UIkit.component = function (name, options) {
+        uabUIkit.component = function (name, options) {
 
             var id = hyphenate(name);
 
@@ -3441,19 +3441,19 @@
             if (!options) {
 
                 if (isPlainObject(components[name])) {
-                    components[name] = UIkit.extend(components[name]);
+                    components[name] = uabUIkit.extend(components[name]);
                 }
 
                 return components[name];
 
             }
 
-            UIkit[name] = function (element, data) {
+            uabUIkit[name] = function (element, data) {
                 var i = arguments.length, argsArray = Array(i);
                 while ( i-- ) argsArray[i] = arguments[i];
 
 
-                var component = UIkit.component(name);
+                var component = uabUIkit.component(name);
 
                 return component.options.functional
                     ? new component({data: isPlainObject(element) ? element : [].concat( argsArray )})
@@ -3461,7 +3461,7 @@
 
                 function init(element) {
 
-                    var instance = UIkit.getComponent(element, name);
+                    var instance = uabUIkit.getComponent(element, name);
 
                     if (instance) {
                         if (!data) {
@@ -3482,20 +3482,20 @@
             opt.name = name;
 
             if (opt.install) {
-                opt.install(UIkit, opt, name);
+                opt.install(uabUIkit, opt, name);
             }
 
-            if (UIkit._initialized && !opt.functional) {
-                fastdom.read(function () { return UIkit[name](("[uk-" + id + "],[data-uk-" + id + "]")); });
+            if (uabUIkit._initialized && !opt.functional) {
+                fastdom.read(function () { return uabUIkit[name](("[uab-" + id + "],[data-uab-" + id + "]")); });
             }
 
             return components[name] = isPlainObject(options) ? opt : options;
         };
 
-        UIkit.getComponents = function (element) { return element && element[DATA] || {}; };
-        UIkit.getComponent = function (element, name) { return UIkit.getComponents(element)[name]; };
+        uabUIkit.getComponents = function (element) { return element && element[DATA] || {}; };
+        uabUIkit.getComponent = function (element, name) { return uabUIkit.getComponents(element)[name]; };
 
-        UIkit.connect = function (node) {
+        uabUIkit.connect = function (node) {
 
             if (node[DATA]) {
                 for (var name in node[DATA]) {
@@ -3508,14 +3508,14 @@
                 var name$1 = getComponentName(node.attributes[i].name);
 
                 if (name$1 && name$1 in components) {
-                    UIkit[name$1](node);
+                    uabUIkit[name$1](node);
                 }
 
             }
 
         };
 
-        UIkit.disconnect = function (node) {
+        uabUIkit.disconnect = function (node) {
             for (var name in node[DATA]) {
                 node[DATA][name]._callDisconnected();
             }
@@ -3524,37 +3524,37 @@
     }
 
     function getComponentName(attribute) {
-        return startsWith(attribute, 'uk-') || startsWith(attribute, 'data-uk-')
-            ? camelize(attribute.replace('data-uk-', '').replace('uk-', ''))
+        return startsWith(attribute, 'uab-') || startsWith(attribute, 'data-uab-')
+            ? camelize(attribute.replace('data-uab-', '').replace('uab-', ''))
             : false;
     }
 
-    var UIkit = function (options) {
+    var uabUIkit = function (options) {
         this._init(options);
     };
 
-    UIkit.util = util;
-    UIkit.data = '__uikit__';
-    UIkit.prefix = 'uk-';
-    UIkit.options = {};
-    UIkit.version = '3.5.4';
+    uabUIkit.util = util;
+    uabUIkit.data = '__uikit__';
+    uabUIkit.prefix = 'uab-';
+    uabUIkit.options = {};
+    uabUIkit.version = '3.5.4';
 
-    globalAPI(UIkit);
-    hooksAPI(UIkit);
-    stateAPI(UIkit);
-    componentAPI(UIkit);
-    instanceAPI(UIkit);
+    globalAPI(uabUIkit);
+    hooksAPI(uabUIkit);
+    stateAPI(uabUIkit);
+    componentAPI(uabUIkit);
+    instanceAPI(uabUIkit);
 
-    function Core (UIkit) {
+    function Core (uabUIkit) {
 
         inBrowser && ready(function () {
 
-            UIkit.update();
-            on(window, 'load resize', function () { return UIkit.update(null, 'resize'); });
+            uabUIkit.update();
+            on(window, 'load resize', function () { return uabUIkit.update(null, 'resize'); });
             on(document, 'loadedmetadata load', function (ref) {
                 var target = ref.target;
 
-                return UIkit.update(target, 'resize');
+                return uabUIkit.update(target, 'resize');
             }, true);
 
             // throttle `scroll` event (Safari triggers multiple `scroll` events per frame)
@@ -3567,7 +3567,7 @@
                 pending = true;
                 fastdom.write(function () { return pending = false; });
 
-                UIkit.update(null, e.type);
+                uabUIkit.update(null, e.type);
 
             }, {passive: true, capture: true});
 
@@ -3575,7 +3575,7 @@
             on(document, 'animationstart', function (ref) {
                 var target = ref.target;
 
-                if ((css(target, 'animationName') || '').match(/^uk-.*(left|right)/)) {
+                if ((css(target, 'animationName') || '').match(/^uab-.*(left|right)/)) {
 
                     started++;
                     css(document.body, 'overflowX', 'hidden');
@@ -3633,10 +3633,10 @@
                 : 'Down';
     }
 
-    function boot (UIkit) {
+    function boot (uabUIkit) {
 
-        var connect = UIkit.connect;
-        var disconnect = UIkit.disconnect;
+        var connect = uabUIkit.connect;
+        var disconnect = uabUIkit.disconnect;
 
         if (!inBrowser || !window.MutationObserver) {
             return;
@@ -3653,7 +3653,7 @@
             (new MutationObserver(function (mutations) {
                 var updates = [];
                 mutations.forEach(function (mutation) { return applyMutation(mutation, updates); });
-                updates.forEach(function (el) { return UIkit.update(el); });
+                updates.forEach(function (el) { return uabUIkit.update(el); });
             })).observe(document, {
                 childList: true,
                 subtree: true,
@@ -3661,7 +3661,7 @@
                 attributes: true
             });
 
-            UIkit._initialized = true;
+            uabUIkit._initialized = true;
         }
 
         function applyMutation(mutation, updates) {
@@ -3690,16 +3690,16 @@
 
             var name = getComponentName(attributeName);
 
-            if (!name || !(name in UIkit)) {
+            if (!name || !(name in uabUIkit)) {
                 return;
             }
 
             if (hasAttr(target, attributeName)) {
-                UIkit[name](target);
+                uabUIkit[name](target);
                 return true;
             }
 
-            var component = UIkit.getComponent(target, name);
+            var component = uabUIkit.getComponent(target, name);
 
             if (component) {
                 component.$destroy();
@@ -3817,7 +3817,7 @@
                 show = isBoolean(show)
                     ? show
                     : Animation.inProgress(el)
-                        ? hasClass(el, 'uk-animation-leave')
+                        ? hasClass(el, 'uab-animation-leave')
                         : Transition.inProgress(el)
                             ? el.style.height === '0px'
                             : !this.isToggled(el);
@@ -3952,9 +3952,9 @@
             animation: [true],
             collapsible: true,
             multiple: false,
-            clsOpen: 'uk-open',
-            toggle: '> .uk-accordion-title',
-            content: '> .uk-accordion-content',
+            clsOpen: 'uab-open',
+            toggle: '> .uab-accordion-title',
+            content: '> .uab-accordion-content',
             transition: 'ease',
             offset: 0
         },
@@ -4081,7 +4081,7 @@
 
         data: {
             animation: [true],
-            selClose: '.uk-alert-close',
+            selClose: '.uab-alert-close',
             duration: 150,
             hideProps: assign({opacity: 0}, Togglable.data.hideProps)
         },
@@ -4352,8 +4352,8 @@
             delayShow: 0,
             delayHide: 800,
             clsDrop: false,
-            animation: ['uk-animation-fade'],
-            cls: 'uk-open'
+            animation: ['uab-animation-fade'],
+            cls: 'uab-open'
         },
 
         computed: {
@@ -4367,7 +4367,7 @@
             clsDrop: function(ref) {
                 var clsDrop = ref.clsDrop;
 
-                return clsDrop || ("uk-" + (this.$options.name));
+                return clsDrop || ("uab-" + (this.$options.name));
             },
 
             clsPos: function() {
@@ -4869,8 +4869,8 @@
         },
 
         data: {
-            margin: 'uk-margin-small-top',
-            firstColumn: 'uk-first-column'
+            margin: 'uab-margin-small-top',
+            firstColumn: 'uab-first-column'
         },
 
         update: {
@@ -5000,14 +5000,14 @@
         },
 
         data: {
-            margin: 'uk-grid-margin',
-            clsStack: 'uk-grid-stack',
+            margin: 'uab-grid-margin',
+            clsStack: 'uab-grid-stack',
             masonry: false,
             parallax: 0
         },
 
         connected: function() {
-            this.masonry && addClass(this.$el, 'uk-flex-top uk-flex-wrap-top');
+            this.masonry && addClass(this.$el, 'uab-flex-top uab-flex-wrap-top');
         },
 
         update: [
@@ -5415,7 +5415,7 @@
         },
 
         beforeConnect: function() {
-            this.class += ' uk-svg';
+            this.class += ' uab-svg';
         },
 
         connected: function() {
@@ -5588,7 +5588,7 @@
         var length = getMaxPathLength(el);
 
         if (length) {
-            el.style.setProperty('--uk-animation-stroke', length);
+            el.style.setProperty('--uab-animation-stroke', length);
         }
 
     }
@@ -5694,7 +5694,7 @@
         isIcon: true,
 
         beforeConnect: function() {
-            addClass(this.$el, 'uk-icon');
+            addClass(this.$el, 'uab-icon');
         },
 
         methods: {
@@ -5735,7 +5735,7 @@
         extends: IconComponent,
 
         beforeConnect: function() {
-            addClass(this.$el, 'uk-slidenav');
+            addClass(this.$el, 'uab-slidenav');
         },
 
         computed: {
@@ -5743,7 +5743,7 @@
             icon: function(ref, $el) {
                 var icon = ref.icon;
 
-                return hasClass($el, 'uk-slidenav-large')
+                return hasClass($el, 'uab-slidenav-large')
                     ? (icon + "-large")
                     : icon;
             }
@@ -5761,9 +5761,9 @@
             icon: function(ref, $el) {
                 var icon = ref.icon;
 
-                return hasClass($el, 'uk-search-icon') && parents($el, '.uk-search-large').length
+                return hasClass($el, 'uab-search-icon') && parents($el, '.uab-search-large').length
                     ? 'search-large'
-                    : parents($el, '.uk-search-navbar').length
+                    : parents($el, '.uab-search-navbar').length
                         ? 'search-navbar'
                         : icon;
             }
@@ -5779,7 +5779,7 @@
         computed: {
 
             icon: function() {
-                return ("close-" + (hasClass(this.$el, 'uk-close-large') ? 'large' : 'icon'));
+                return ("close-" + (hasClass(this.$el, 'uab-close-large') ? 'large' : 'icon'));
             }
 
         }
@@ -5799,8 +5799,8 @@
     };
 
     var parsed = {};
-    function install(UIkit) {
-        UIkit.icon.add = function (name, svg) {
+    function install(uabUIkit) {
+        uabUIkit.icon.add = function (name, svg) {
             var obj;
 
 
@@ -5810,8 +5810,8 @@
                 delete parsed[name];
             });
 
-            if (UIkit._initialized) {
-                apply(document.body, function (el) { return each(UIkit.getComponents(el), function (cmp) {
+            if (uabUIkit._initialized) {
+                apply(document.body, function (el) { return each(uabUIkit.getComponents(el), function (cmp) {
                         cmp.$options.isIcon && cmp.icon in added && cmp.$reset();
                     }); }
                 );
@@ -6145,8 +6145,8 @@
 
         data: {
             fill: '',
-            clsWrapper: 'uk-leader-fill',
-            clsHide: 'uk-leader-hide',
+            clsWrapper: 'uab-leader-fill',
+            clsHide: 'uab-leader-hide',
             attrFill: 'data-fill'
         },
 
@@ -6243,7 +6243,7 @@
         },
 
         data: {
-            cls: 'uk-open',
+            cls: 'uab-open',
             escClose: true,
             bgClose: true,
             overlay: true,
@@ -6474,9 +6474,9 @@
         mixins: [Modal],
 
         data: {
-            clsPage: 'uk-modal-page',
-            selPanel: '.uk-modal-dialog',
-            selClose: '.uk-modal-close, .uk-modal-close-default, .uk-modal-close-outside, .uk-modal-close-full'
+            clsPage: 'uab-modal-page',
+            selPanel: '.uab-modal-dialog',
+            selClose: '.uab-modal-close, .uab-modal-close-default, .uab-modal-close-outside, .uab-modal-close-full'
         },
 
         events: [
@@ -6488,8 +6488,8 @@
 
                 handler: function() {
 
-                    if (hasClass(this.panel, 'uk-margin-auto-vertical')) {
-                        addClass(this.$el, 'uk-flex');
+                    if (hasClass(this.panel, 'uab-margin-auto-vertical')) {
+                        addClass(this.$el, 'uab-flex');
                     } else {
                         css(this.$el, 'display', 'block');
                     }
@@ -6506,7 +6506,7 @@
                 handler: function() {
 
                     css(this.$el, 'display', '');
-                    removeClass(this.$el, 'uk-flex');
+                    removeClass(this.$el, 'uab-flex');
 
                 }
             }
@@ -6522,7 +6522,7 @@
         modal.dialog = function (content, options) {
 
             var dialog = modal(
-                ("<div class=\"uk-modal\"> <div class=\"uk-modal-dialog\">" + content + "</div> </div>"),
+                ("<div class=\"uab-modal\"> <div class=\"uab-modal-dialog\">" + content + "</div> </div>"),
                 options
             );
 
@@ -6540,7 +6540,7 @@
                 function (ref) {
                     var labels = ref.labels;
 
-                    return ("<div class=\"uk-modal-body\">" + (isString(message) ? message : html(message)) + "</div> <div class=\"uk-modal-footer uk-text-right\"> <button class=\"uk-button uk-button-primary uk-modal-close\" autofocus>" + (labels.ok) + "</button> </div>");
+                    return ("<div class=\"uab-modal-body\">" + (isString(message) ? message : html(message)) + "</div> <div class=\"uab-modal-footer uab-text-right\"> <button class=\"uab-button uab-button-primary uab-modal-close\" autofocus>" + (labels.ok) + "</button> </div>");
             },
                 options,
                 function (deferred) { return deferred.resolve(); }
@@ -6552,7 +6552,7 @@
                 function (ref) {
                     var labels = ref.labels;
 
-                    return ("<form> <div class=\"uk-modal-body\">" + (isString(message) ? message : html(message)) + "</div> <div class=\"uk-modal-footer uk-text-right\"> <button class=\"uk-button uk-button-default uk-modal-close\" type=\"button\">" + (labels.cancel) + "</button> <button class=\"uk-button uk-button-primary\" autofocus>" + (labels.ok) + "</button> </div> </form>");
+                    return ("<form> <div class=\"uab-modal-body\">" + (isString(message) ? message : html(message)) + "</div> <div class=\"uab-modal-footer uab-text-right\"> <button class=\"uab-button uab-button-default uab-modal-close\" type=\"button\">" + (labels.cancel) + "</button> <button class=\"uab-button uab-button-primary\" autofocus>" + (labels.ok) + "</button> </div> </form>");
             },
                 options,
                 function (deferred) { return deferred.reject(); }
@@ -6564,7 +6564,7 @@
                 function (ref) {
                     var labels = ref.labels;
 
-                    return ("<form class=\"uk-form-stacked\"> <div class=\"uk-modal-body\"> <label>" + (isString(message) ? message : html(message)) + "</label> <input class=\"uk-input\" value=\"" + (value || '') + "\" autofocus> </div> <div class=\"uk-modal-footer uk-text-right\"> <button class=\"uk-button uk-button-default uk-modal-close\" type=\"button\">" + (labels.cancel) + "</button> <button class=\"uk-button uk-button-primary\">" + (labels.ok) + "</button> </div> </form>");
+                    return ("<form class=\"uab-form-stacked\"> <div class=\"uab-modal-body\"> <label>" + (isString(message) ? message : html(message)) + "</label> <input class=\"uab-input\" value=\"" + (value || '') + "\" autofocus> </div> <div class=\"uab-modal-footer uab-text-right\"> <button class=\"uab-button uab-button-default uab-modal-close\" type=\"button\">" + (labels.cancel) + "</button> <button class=\"uab-button uab-button-primary\">" + (labels.ok) + "</button> </div> </form>");
             },
                 options,
                 function (deferred) { return deferred.resolve(null); },
@@ -6607,7 +6607,7 @@
         extends: Accordion,
 
         data: {
-            targets: '> .uk-parent',
+            targets: '> .uab-parent',
             toggle: '> a',
             content: '> ul'
         }
@@ -6635,9 +6635,9 @@
         },
 
         data: {
-            dropdown: '.uk-navbar-nav > li',
+            dropdown: '.uab-navbar-nav > li',
             align: !isRtl ? 'left' : 'right',
-            clsDrop: 'uk-navbar-dropdown',
+            clsDrop: 'uab-navbar-dropdown',
             mode: undefined,
             offset: undefined,
             delayShow: undefined,
@@ -6650,7 +6650,7 @@
             dropbarAnchor: false,
             duration: 200,
             forceHeight: true,
-            selMinHeight: '.uk-navbar-nav > li > a, .uk-navbar-item, .uk-navbar-toggle'
+            selMinHeight: '.uab-navbar-nav > li > a, .uab-navbar-item, .uab-navbar-toggle'
         },
 
         computed: {
@@ -6684,14 +6684,14 @@
                         return null;
                     }
 
-                    dropbar = this._dropbar || query(dropbar, this.$el) || $('+ .uk-navbar-dropbar', this.$el);
+                    dropbar = this._dropbar || query(dropbar, this.$el) || $('+ .uab-navbar-dropbar', this.$el);
 
                     return dropbar ? dropbar : (this._dropbar = $('<div></div>'));
 
                 },
 
                 watch: function(dropbar) {
-                    addClass(dropbar, 'uk-navbar-dropbar');
+                    addClass(dropbar, 'uab-navbar-dropbar');
                 },
 
                 immediate: true
@@ -6794,7 +6794,7 @@
                     var dir = ref.dir;
 
 
-                    toggleClass(this.dropbar, 'uk-navbar-dropbar-slide', this.dropbarMode === 'slide' || parents(this.$el).some(function (el) { return css(el, 'position') !== 'static'; }));
+                    toggleClass(this.dropbar, 'uab-navbar-dropbar-slide', this.dropbarMode === 'slide' || parents(this.$el).some(function (el) { return css(el, 'position') !== 'static'; }));
 
                     this.clsDrop && addClass($el, ((this.clsDrop) + "-dropbar"));
 
@@ -6902,15 +6902,15 @@
             mode: 'slide',
             flip: false,
             overlay: false,
-            clsPage: 'uk-offcanvas-page',
-            clsContainer: 'uk-offcanvas-container',
-            selPanel: '.uk-offcanvas-bar',
-            clsFlip: 'uk-offcanvas-flip',
-            clsContainerAnimation: 'uk-offcanvas-container-animation',
-            clsSidebarAnimation: 'uk-offcanvas-bar-animation',
-            clsMode: 'uk-offcanvas',
-            clsOverlay: 'uk-offcanvas-overlay',
-            selClose: '.uk-offcanvas-close',
+            clsPage: 'uab-offcanvas-page',
+            clsContainer: 'uab-offcanvas-container',
+            selPanel: '.uab-offcanvas-bar',
+            clsFlip: 'uab-offcanvas-flip',
+            clsContainerAnimation: 'uab-offcanvas-container-animation',
+            clsSidebarAnimation: 'uab-offcanvas-bar-animation',
+            clsMode: 'uab-offcanvas',
+            clsOverlay: 'uab-offcanvas-overlay',
+            selClose: '.uab-offcanvas-close',
             container: false
         },
 
@@ -7151,8 +7151,8 @@
         },
 
         data: {
-            selContainer: '.uk-modal',
-            selContent: '.uk-modal-dialog'
+            selContainer: '.uab-modal',
+            selContent: '.uab-modal-dialog'
         },
 
         computed: {
@@ -7210,7 +7210,7 @@
         props: ['width', 'height'],
 
         connected: function() {
-            addClass(this.$el, 'uk-responsive-width');
+            addClass(this.$el, 'uab-responsive-width');
         },
 
         update: {
@@ -7299,7 +7299,7 @@
             offsetLeft: 0,
             repeat: false,
             delay: 0,
-            inViewClass: 'uk-scrollspy-inview'
+            inViewClass: 'uab-scrollspy-inview'
         }); },
 
         computed: {
@@ -7342,7 +7342,7 @@
                         var state = el._ukScrollspyState;
 
                         if (!state) {
-                            state = {cls: data(el, 'uk-scrollspy-class') || this$1.cls};
+                            state = {cls: data(el, 'uab-scrollspy-class') || this$1.cls};
                         }
 
                         state.show = isInView(el, this$1.offsetTop, this$1.offsetLeft);
@@ -7423,7 +7423,7 @@
         },
 
         data: {
-            cls: 'uk-active',
+            cls: 'uab-active',
             closest: false,
             scroll: false,
             overflow: true,
@@ -7546,10 +7546,10 @@
             bottom: false,
             offset: 0,
             animation: '',
-            clsActive: 'uk-active',
+            clsActive: 'uab-active',
             clsInactive: '',
-            clsFixed: 'uk-sticky-fixed',
-            clsBelow: 'uk-sticky-below',
+            clsFixed: 'uab-sticky-fixed',
+            clsBelow: 'uab-sticky-below',
             selTarget: '',
             widthElement: false,
             showOnUp: false,
@@ -7597,7 +7597,7 @@
         },
 
         connected: function() {
-            this.placeholder = $('+ .uk-sticky-placeholder', this.$el) || $('<div class="uk-sticky-placeholder"></div>');
+            this.placeholder = $('+ .uab-sticky-placeholder', this.$el) || $('<div class="uab-sticky-placeholder"></div>');
             this.isFixed = false;
             this.isActive = false;
         },
@@ -7883,13 +7883,13 @@
         },
 
         data: {
-            connect: '~.uk-switcher',
+            connect: '~.uab-switcher',
             toggle: '> * > :first-child',
             active: 0,
             swiping: true,
-            cls: 'uk-active',
-            clsContainer: 'uk-switcher',
-            attrItem: 'uk-switcher-item'
+            cls: 'uab-active',
+            clsContainer: 'uab-switcher',
+            attrItem: 'uab-switcher-item'
         },
 
         computed: {
@@ -7923,7 +7923,7 @@
                 get: function(ref, $el) {
                     var toggle = ref.toggle;
 
-                    return $$(toggle, $el).filter(function (el) { return !matches(el, '.uk-disabled *, .uk-disabled, [disabled]'); });
+                    return $$(toggle, $el).filter(function (el) { return !matches(el, '.uab-disabled *, .uab-disabled, [disabled]'); });
                 },
 
                 watch: function(toggles) {
@@ -8046,15 +8046,15 @@
 
         data: {
             media: 960,
-            attrItem: 'uk-tab-item'
+            attrItem: 'uab-tab-item'
         },
 
         connected: function() {
 
-            var cls = hasClass(this.$el, 'uk-tab-left')
-                ? 'uk-tab-left'
-                : hasClass(this.$el, 'uk-tab-right')
-                    ? 'uk-tab-right'
+            var cls = hasClass(this.$el, 'uab-tab-left')
+                ? 'uab-tab-left'
+                : hasClass(this.$el, 'uab-tab-right')
+                    ? 'uab-tab-right'
                     : false;
 
             if (cls) {
@@ -8247,13 +8247,13 @@
     });
 
     // register components
-    each(components, function (component, name) { return UIkit.component(name, component); }
+    each(components, function (component, name) { return uabUIkit.component(name, component); }
     );
 
     // core functionality
-    UIkit.use(Core);
+    uabUIkit.use(Core);
 
-    boot(UIkit);
+    boot(uabUIkit);
 
     var countdown = {
 
@@ -8266,7 +8266,7 @@
 
         data: {
             date: '',
-            clsWrapper: '.uk-countdown-%unit%'
+            clsWrapper: '.uab-countdown-%unit%'
         },
 
         computed: {
@@ -8421,7 +8421,7 @@
         };
     }
 
-    var targetClass = 'uk-animation-target';
+    var targetClass = 'uab-animation-target';
 
     var Animate = {
 
@@ -8585,8 +8585,8 @@
         data: {
             target: null,
             selActive: false,
-            attrItem: 'uk-filter-control',
-            cls: 'uk-active',
+            attrItem: 'uab-filter-control',
+            cls: 'uab-active',
             animation: 250
         },
 
@@ -9344,7 +9344,7 @@
                     html(this.nav, this.slides.map(function (_, i) { return ("<li " + (this$1.attrItem) + "=\"" + i + "\"><a href></a></li>"); }).join(''));
                 }
 
-                toggleClass($$(this.selNavItem, this.$el).concat(this.nav), 'uk-hidden', !this.maxIndex);
+                toggleClass($$(this.selNavItem, this.$el).concat(this.nav), 'uab-hidden', !this.maxIndex);
 
                 this.updateNav();
 
@@ -9392,7 +9392,7 @@
                     var cmd = data(el, this$1.attrItem);
 
                     toggleClass(el, this$1.clsActive, toNumber(cmd) === i);
-                    toggleClass(el, 'uk-invisible', this$1.finite && (cmd === 'previous' && i === 0 || cmd === 'next' && i >= this$1.maxIndex));
+                    toggleClass(el, 'uab-invisible', this$1.finite && (cmd === 'previous' && i === 0 || cmd === 'next' && i >= this$1.maxIndex));
                 });
 
             }
@@ -9422,7 +9422,7 @@
             prevIndex: -1,
             stack: [],
             percent: 0,
-            clsActive: 'uk-active',
+            clsActive: 'uab-active',
             clsActivated: false,
             Transitioner: false,
             transitionOptions: {}
@@ -9665,7 +9665,7 @@
 
         data: {
             animation: 'slide',
-            clsActivated: 'uk-transition-active',
+            clsActivated: 'uab-transition-active',
             Animations: Animations,
             Transitioner: Transitioner
         },
@@ -9733,16 +9733,16 @@
             videoAutoplay: false,
             delayControls: 3000,
             items: [],
-            cls: 'uk-open',
-            clsPage: 'uk-lightbox-page',
-            selList: '.uk-lightbox-items',
-            attrItem: 'uk-lightbox-item',
-            selClose: '.uk-close-large',
-            selCaption: '.uk-lightbox-caption',
+            cls: 'uab-open',
+            clsPage: 'uab-lightbox-page',
+            selList: '.uab-lightbox-items',
+            attrItem: 'uab-lightbox-item',
+            selClose: '.uab-close-large',
+            selCaption: '.uab-lightbox-caption',
             pauseOnHover: false,
             velocity: 2,
             Animations: Animations$1,
-            template: "<div class=\"uk-lightbox uk-overflow-hidden\"> <ul class=\"uk-lightbox-items\"></ul> <div class=\"uk-lightbox-toolbar uk-position-top uk-text-right uk-transition-slide-top uk-transition-opaque\"> <button class=\"uk-lightbox-toolbar-icon uk-close-large\" type=\"button\" uk-close></button> </div> <a class=\"uk-lightbox-button uk-position-center-left uk-position-medium uk-transition-fade\" href uk-slidenav-previous uk-lightbox-item=\"previous\"></a> <a class=\"uk-lightbox-button uk-position-center-right uk-position-medium uk-transition-fade\" href uk-slidenav-next uk-lightbox-item=\"next\"></a> <div class=\"uk-lightbox-toolbar uk-lightbox-caption uk-position-bottom uk-text-center uk-transition-slide-bottom uk-transition-opaque\"></div> </div>"
+            template: "<div class=\"uab-lightbox uab-overflow-hidden\"> <ul class=\"uab-lightbox-items\"></ul> <div class=\"uab-lightbox-toolbar uab-position-top uab-text-right uab-transition-slide-top uab-transition-opaque\"> <button class=\"uab-lightbox-toolbar-icon uab-close-large\" type=\"button\" uab-close></button> </div> <a class=\"uab-lightbox-button uab-position-center-left uab-position-medium uab-transition-fade\" href uab-slidenav-previous uab-lightbox-item=\"previous\"></a> <a class=\"uab-lightbox-button uab-position-center-right uab-position-medium uab-transition-fade\" href uab-slidenav-next uab-lightbox-item=\"next\"></a> <div class=\"uab-lightbox-toolbar uab-lightbox-caption uab-position-bottom uab-text-center uab-transition-slide-bottom uab-transition-opaque\"></div> </div>"
         }); },
 
         created: function() {
@@ -9760,7 +9760,7 @@
             caption: function(ref, $el) {
                 var selCaption = ref.selCaption;
 
-                return $('.uk-lightbox-caption', $el);
+                return $('.uab-lightbox-caption', $el);
             }
 
         },
@@ -9923,7 +9923,7 @@
                     var poster = item.poster;
                     var attrs = item.attrs; if ( attrs === void 0 ) attrs = {};
 
-                    this.setItem(item, '<span uk-spinner></span>');
+                    this.setItem(item, '<span uab-spinner></span>');
 
                     if (!src) {
                         return;
@@ -9935,8 +9935,8 @@
                         allow: 'autoplay',
                         allowfullscreen: '',
                         style: 'max-width: 100%; box-sizing: border-box;',
-                        'uk-responsive': '',
-                        'uk-video': ("" + (this.videoAutoplay))
+                        'uab-responsive': '',
+                        'uab-video': ("" + (this.videoAutoplay))
                     };
 
                     // Image
@@ -9960,7 +9960,7 @@
                             poster: poster,
                             controls: '',
                             playsinline: '',
-                            'uk-video': ("" + (this.videoAutoplay))
+                            'uab-video': ("" + (this.videoAutoplay))
                         }, attrs));
 
                         on(video, 'loadedmetadata', function () {
@@ -9976,7 +9976,7 @@
                             src: src,
                             frameborder: '0',
                             allowfullscreen: '',
-                            class: 'uk-lightbox-iframe'
+                            class: 'uab-lightbox-iframe'
                         }, attrs)));
 
                     // YouTube
@@ -10045,7 +10045,7 @@
             },
 
             setError: function(item) {
-                this.setItem(item, '<span uk-icon="icon: bolt; ratio: 2"></span>');
+                this.setItem(item, '<span uab-icon="icon: bolt; ratio: 2"></span>');
             },
 
             showControls: function() {
@@ -10053,12 +10053,12 @@
                 clearTimeout(this.controlsTimer);
                 this.controlsTimer = setTimeout(this.hideControls, this.delayControls);
 
-                addClass(this.$el, 'uk-active', 'uk-transition-active');
+                addClass(this.$el, 'uab-active', 'uab-transition-active');
 
             },
 
             hideControls: function() {
-                removeClass(this.$el, 'uk-active', 'uk-transition-active');
+                removeClass(this.$el, 'uab-active', 'uab-transition-active');
             }
 
         }
@@ -10108,7 +10108,7 @@
                 name: 'click',
 
                 delegate: function() {
-                    return ((this.toggle) + ":not(.uk-disabled)");
+                    return ((this.toggle) + ":not(.uab-disabled)");
                 },
 
                 handler: function(e) {
@@ -10156,15 +10156,15 @@
 
     };
 
-    function install$2(UIkit, Lightbox) {
+    function install$2(uabUIkit, Lightbox) {
 
-        if (!UIkit.lightboxPanel) {
-            UIkit.component('lightboxPanel', LightboxPanel);
+        if (!uabUIkit.lightboxPanel) {
+            uabUIkit.component('lightboxPanel', LightboxPanel);
         }
 
         assign(
             Lightbox.props,
-            UIkit.component('lightboxPanel').options.props
+            uabUIkit.component('lightboxPanel').options.props
         );
 
     }
@@ -10196,9 +10196,9 @@
             timeout: 5000,
             group: null,
             pos: 'top-center',
-            clsContainer: 'uk-notification',
-            clsClose: 'uk-notification-close',
-            clsMsg: 'uk-notification-message'
+            clsContainer: 'uab-notification',
+            clsClose: 'uab-notification-close',
+            clsMsg: 'uab-notification-message'
         },
 
         install: install$3,
@@ -10225,7 +10225,7 @@
                 || append(this.$container, ("<div class=\"" + (this.clsContainer) + " " + (this.clsContainer) + "-" + (this.pos) + "\" style=\"display: block\"></div>"));
 
             this.$mount(append(container,
-                ("<div class=\"" + (this.clsMsg) + (this.status ? (" " + (this.clsMsg) + "-" + (this.status)) : '') + "\"> <a href class=\"" + (this.clsClose) + "\" data-uk-close></a> <div>" + (this.message) + "</div> </div>")
+                ("<div class=\"" + (this.clsMsg) + (this.status ? (" " + (this.clsMsg) + "-" + (this.status)) : '') + "\"> <a href class=\"" + (this.clsClose) + "\" data-uab-close></a> <div>" + (this.message) + "</div> </div>")
             ));
 
         },
@@ -10300,10 +10300,10 @@
 
     };
 
-    function install$3(UIkit) {
-        UIkit.notification.closeAll = function (group, immediate) {
+    function install$3(uabUIkit) {
+        uabUIkit.notification.closeAll = function (group, immediate) {
             apply(document.body, function (el) {
-                var notification = UIkit.getComponent(el, 'notification');
+                var notification = uabUIkit.getComponent(el, 'notification');
                 if (notification && (!group || group === notification.group)) {
                     notification.close(immediate);
                 }
@@ -10952,10 +10952,10 @@
         data: {
             center: false,
             sets: false,
-            attrItem: 'uk-slider-item',
-            selList: '.uk-slider-items',
-            selNav: '.uk-slider-nav',
-            clsContainer: 'uk-slider-container',
+            attrItem: 'uab-slider-item',
+            selList: '.uab-slider-items',
+            selNav: '.uab-slider-nav',
+            clsContainer: 'uab-slider-container',
             Transitioner: Transitioner$1
         },
 
@@ -11063,7 +11063,7 @@
 
                 $$(("[" + (this.attrItem) + "],[data-" + (this.attrItem) + "]"), this.$el).forEach(function (el) {
                     var index = data(el, this$1.attrItem);
-                    this$1.maxIndex && toggleClass(el, 'uk-hidden', isNumeric(index) && (this$1.sets && !includes(this$1.sets, toFloat(index)) || index > this$1.maxIndex));
+                    this$1.maxIndex && toggleClass(el, 'uab-hidden', isNumeric(index) && (this$1.sets && !includes(this$1.sets, toFloat(index)) || index > this$1.maxIndex));
                 });
 
                 if (this.length && !this.dragging && !this.stack.length) {
@@ -11445,9 +11445,9 @@
             ratio: '16:9',
             minHeight: false,
             maxHeight: false,
-            selList: '.uk-slideshow-items',
-            attrItem: 'uk-slideshow-item',
-            selNav: '.uk-slideshow-nav',
+            selList: '.uab-slideshow-items',
+            attrItem: 'uab-slideshow-item',
+            selNav: '.uab-slideshow-nav',
             Animations: Animations$2
         },
 
@@ -11505,13 +11505,13 @@
         data: {
             group: false,
             threshold: 5,
-            clsItem: 'uk-sortable-item',
-            clsPlaceholder: 'uk-sortable-placeholder',
-            clsDrag: 'uk-sortable-drag',
-            clsDragState: 'uk-drag',
-            clsBase: 'uk-sortable',
-            clsNoDrag: 'uk-sortable-nodrag',
-            clsEmpty: 'uk-sortable-empty',
+            clsItem: 'uab-sortable-item',
+            clsPlaceholder: 'uab-sortable-placeholder',
+            clsDrag: 'uab-sortable-drag',
+            clsDragState: 'uab-drag',
+            clsBase: 'uab-sortable',
+            clsNoDrag: 'uab-sortable-nodrag',
+            clsEmpty: 'uab-sortable-empty',
             clsCustom: '',
             handle: false,
             pos: {}
@@ -11878,10 +11878,10 @@
             pos: 'top',
             title: '',
             delay: 0,
-            animation: ['uk-animation-scale-up'],
+            animation: ['uab-animation-scale-up'],
             duration: 100,
-            cls: 'uk-active',
-            clsPos: 'uk-tooltip'
+            cls: 'uab-active',
+            clsPos: 'uab-tooltip'
         },
 
         beforeConnect: function() {
@@ -12011,7 +12011,7 @@
 
         data: {
             allow: false,
-            clsDragover: 'uk-dragover',
+            clsDragover: 'uab-dragover',
             concurrent: 1,
             maxSize: 0,
             method: 'POST',
@@ -12209,9 +12209,9 @@
         Upload: upload
     });
 
-    each(components$1, function (component, name) { return UIkit.component(name, component); }
+    each(components$1, function (component, name) { return uabUIkit.component(name, component); }
     );
 
-    return UIkit;
+    return uabUIkit;
 
 })));
