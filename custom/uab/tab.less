@@ -16,7 +16,7 @@
 
 @tab-item-border-width:                         @global-border-width;
 @tab-item-font-size:                            @global-small-font-size;
-@tab-item-text-transform:                       uppercase;
+
 
 @tab-item-active-border:                        @global-primary-background;
 
@@ -46,14 +46,17 @@
 .hook-tab-item() {
     border-bottom: @tab-item-border-width solid transparent;
     font-size: @tab-item-font-size;
-    text-transform: @tab-item-text-transform;
+   
     transition: color 0.1s ease-in-out;
     text-decoration:inherit;
 }
 
 .hook-tab-item-hover() {}
 
-.hook-tab-item-active() { border-color: @tab-item-active-border; }
+.hook-tab-item-active() { 
+    border-color: @tab-item-active-border;
+    background-color:@global-light-gray; 
+}
 
 .hook-tab-item-disabled() {}
 
