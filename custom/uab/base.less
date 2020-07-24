@@ -76,7 +76,7 @@
     font-weight:@global-font-weight-kulturista-semi-bold;
     font-family:@global-font-kulturista;
     text-transform:uppercase;
-    font-size: @global-xlarge-font-size;
+    font-size: (@global-xlarge-font-size * .8);
 }
 
 
@@ -85,7 +85,7 @@
  
     font-weight: @global-font-weight-proxima-semi-bold;
     font-family:@global-font-proxima;
-    font-size:@global-xlarge-font-size;
+    font-size:(@global-xlarge-font-size * .8);
 }
 
 
@@ -119,7 +119,17 @@
    
 }
 
-/* Tablet landscape and bigger */
+
+/* Tablet landscape  */
+@media (min-width: @breakpoint-small) {
+
+    h1, .uk-h1 { font-size: (@global-xlarge-font-size * .9); }
+    h2, .uk-h2 { font-size: (@global-xlarge-font-size * .9); }
+
+}
+
+
+/* Desktop & bigger */
 @media (min-width: @breakpoint-medium) {
 
     h1, .uk-h1 { font-size: @global-xlarge-font-size; }
