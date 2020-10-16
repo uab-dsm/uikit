@@ -1,0 +1,81 @@
+//
+// Component: Text
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+//
+// New
+//
+
+@text-meta-link-color:                          @text-meta-color;
+@text-meta-link-hover-color:                    @global-color;
+
+//UAB Overrides 
+
+@text-large-font-size:     1.3rem;
+
+// Style modifiers
+// ========================================================================
+
+.hook-text-lead() {}
+
+.hook-text-meta() {
+
+    a { 
+        color: @text-meta-link-color;
+        text-decoration-color:inherit;
+     }
+
+    a:hover {
+        color: @text-meta-link-hover-color;
+        text-decoration: none;
+    }
+
+}
+
+
+// Size modifiers
+// ========================================================================
+
+.hook-text-small() {}
+
+.hook-text-large() {
+    line-height:1;
+}
+
+
+// Background modifier
+// ========================================================================
+
+.hook-text-background() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-text-misc() {}
+
+
+// Inverse
+// ========================================================================
+
+.hook-inverse-text-lead() {}
+.hook-inverse-text-meta() {}
+
+
+//UAB Additions 
+
+.uk-text-muted,
+.uk-text-emphasis,
+.uk-text-primary,
+.uk-text-secondary,
+.uk-text-success,
+.uk-text-warning,
+.uk-text-danger { 
+    text-decoration-color: inherit; 
+}
+

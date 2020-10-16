@@ -1,0 +1,206 @@
+//
+// Component: Base
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+//
+// New
+//
+
+@base-code-padding-horizontal:                  6px;
+@base-code-padding-vertical:                    2px;
+@base-code-background:                          @global-muted-background;
+
+@base-blockquote-color:                         @global-emphasis-color;
+
+@base-blockquote-footer-color:                  @global-color;
+
+@base-pre-padding:                              10px;
+@base-pre-background:                           @global-background;
+@base-pre-border-width:                         @global-border-width;
+@base-pre-border:                               @global-border;
+@base-pre-border-radius:                        3px;
+
+
+//UAB Overrides 
+@base-heading-color:                            @global-color;
+@base-link-text-decoration:                     underline;
+
+@base-em-color:                                 @global-color;
+@base-code-color:                               @global-color;
+
+
+
+
+
+
+
+// Body
+// ========================================================================
+
+.hook-base-body() {}
+
+
+// Links
+// ========================================================================
+
+
+    .hook-base-link() {
+        text-decoration-color: @global-campus-green;
+    }
+
+
+.hook-base-link-hover() {}
+
+
+// Text-level semantics
+// ========================================================================
+
+.hook-base-code() {
+    padding: @base-code-padding-vertical @base-code-padding-horizontal;
+    background: @base-code-background;
+}
+
+
+// Headings
+// ========================================================================
+
+.hook-base-heading() {}
+
+.hook-base-h1() {
+  
+    font-weight:@global-font-weight-kulturista-semi-bold;
+    font-family:@global-font-kulturista;
+    text-transform:uppercase;
+    font-size: (@global-xlarge-font-size * .8);
+}
+
+
+
+.hook-base-h2() {
+ 
+    font-weight: @global-font-weight-proxima-semi-bold;
+    font-family:@global-font-proxima;
+    font-size:(@global-xlarge-font-size * .8);
+}
+
+
+.hook-base-h3() {
+  
+    font-weight:@global-font-weight-proxima-medium;
+    font-family:@global-font-proxima;
+    font-size:@global-large-font-size;
+}
+
+.hook-base-h4() {
+ 
+    font-weight:@global-font-weight-kulturista-medium;
+    font-family:@global-font-kulturista;
+    font-size:@global-medium-font-size;
+}
+
+.hook-base-h5() {
+  
+    font-family:@global-font-proxima;
+    font-weight:@global-font-weight-proxima-regular;
+    font-size:1.3rem;
+    
+}
+
+.hook-base-h6() {
+  
+    font-family:@global-font-proxima;
+    font-weight:@global-font-weight-proxima-bold;
+    font-size:1.1rem;
+   
+}
+
+
+/* Tablet landscape  */
+@media (min-width: @breakpoint-small) {
+
+    h1, .uk-h1 { font-size: (@global-xlarge-font-size * .9); }
+    h2, .uk-h2 { font-size: (@global-xlarge-font-size * .9); }
+
+}
+
+
+/* Desktop & bigger */
+@media (min-width: @breakpoint-medium) {
+
+    h1, .uk-h1 { font-size: @global-xlarge-font-size; }
+    h2, .uk-h2 { font-size: @global-xlarge-font-size; }
+
+}
+
+
+// Horizontal rules
+// ========================================================================
+
+.hook-base-hr() {}
+
+
+// Blockquotes
+// ========================================================================
+
+.hook-base-blockquote() {
+    color: @base-blockquote-color;
+}
+
+.hook-base-blockquote-footer() {
+
+    color: @base-blockquote-footer-color;
+
+    &::before { content: "— "; }
+
+}
+
+
+// Preformatted text
+// ========================================================================
+
+.hook-base-pre() {
+    padding: @base-pre-padding;
+    border: @base-pre-border-width solid @base-pre-border;
+    border-radius: @base-pre-border-radius;
+    background: @base-pre-background;
+}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-base-misc() {}
+
+
+// Inverse
+// ========================================================================
+
+@inverse-base-blockquote-color:                @inverse-global-emphasis-color;
+@inverse-base-blockquote-footer-color:         @inverse-global-color;
+
+.hook-inverse-base-link() {}
+.hook-inverse-base-link-hover() {}
+
+.hook-inverse-base-code() {
+    background: @inverse-global-muted-background;
+  
+}
+
+.hook-inverse-base-heading() {}
+
+.hook-inverse-base-h1() {}
+.hook-inverse-base-h2() {}
+.hook-inverse-base-h3() {}
+.hook-inverse-base-h4() {}
+.hook-inverse-base-h5() {}
+.hook-inverse-base-h6() {}
+
+.hook-inverse-base-blockquote() { color: @inverse-base-blockquote-color; }
+.hook-inverse-base-blockquote-footer() { color: @inverse-base-blockquote-footer-color; }
+
+.hook-inverse-base-hr() {}
