@@ -9,7 +9,7 @@ yarn compile
 yarn watch
 
 # Prefix to avoid conflict with existing uikit
-yarn prefix -- -p uab
+yarn prefix -- -p uas
 
 # Prefix to use when using test html files 
 yarn prefix -- -p uk
