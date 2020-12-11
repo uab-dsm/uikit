@@ -5,8 +5,24 @@ export default function (UIkit) {
     inBrowser && ready(() => {
 
         UIkit.update();
-        on(window, 'load resize', () => UIkit.update(null, 'resize'));
-        on(document, 'loadedmetadata load', ({target}) => UIkit.update(target, 'resize'), true);
+
+        // throttle 'resize'
+        let pendingResize;
+        const handleResize = () => {
+            if (pendingResize) {
+                return;
+            }
+            pendingResize = true;
+            fastdom.write(() => pendingResize = false);
+            UIkit.update(null, 'resize');
+        };
+
+        on(window, 'load resize', handleResize);
+        on(document, 'loadedmetadata load', handleResize, true);
+
+        if ('ResizeObserver' in window) {
+            (new ResizeObserver(handleResize)).observe(document.documentElement);
+        }
 
         // throttle `scroll` event (Safari triggers multiple `scroll` events per frame)
         let pending;
@@ -27,10 +43,10 @@ export default function (UIkit) {
             if ((css(target, 'animationName') || '').match(/^uk-.*(left|right)/)) {
 
                 started++;
-                css(document.body, 'overflowX', 'hidden');
+                css(document.documentElement, 'overflowX', 'hidden');
                 setTimeout(() => {
                     if (!--started) {
-                        css(document.body, 'overflowX', '');
+                        css(document.documentElement, 'overflowX', '');
                     }
                 }, toMs(css(target, 'animationDuration')) + 100);
             }

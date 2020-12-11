@@ -1,5 +1,125 @@
 # Changelog
 
+## 3.5.16 (December 11, 2020)
+
+### Fixed
+
+- Fix Sortable lets sort items between lists if no 'group' is set
+- Fix 'scrollParents' checks for `position: fixed`
+
+## 3.5.15 (December 10, 2020)
+
+### Fixed
+
+- Fix regression in Scrollspy Nav
+
+## 3.5.14 (December 9, 2020)
+
+### Fixed
+
+- Fix Scrollspy Nav using wrong viewport as reference
+- Fix Slider component skipping animation if slide item wider than its list
+
+## 3.5.13 (December 8, 2020)
+
+### Changed
+
+- Sorting starts after traversing half the items height/width in Sortable component
+
+## 3.5.12 (December 7, 2020)
+
+### Fixed
+
+- Fix 'isInView' function
+
+## 3.5.11 (December 7, 2020)
+
+### Fixed
+
+- Fix 'positionAt' function did not flip within its targets scroll container
+- Fix drag gets 'overflow: hidden' in Sortable component
+
+## 3.5.10 (November 27, 2020)
+
+### Added
+
+- Add container offset to prevent box-shadow clipping to Slider component
+
+### Changed
+
+- Add '50vw' default horizontal root margin to Image component
+
+### Fixed
+
+- Remove space between inline block elements in Breadcrumb component
+
+## 3.5.9 (October 20, 2020)
+
+### Changed
+
+- Improve breadcrumbs wrapping into the next line
+- Sortable drag is no longer clamped to viewport
+
+### Fixed
+
+- Prevent content overflow in Breadcrumb component
+- Fix prefix script
+- Fix 'scrollIntoView' does not align to top
+
+## 3.5.8 (September 25, 2020)
+
+### Added
+
+- Add lightbox button active hook
+
+### Changed
+
+- IMPORTANT: Set `@pagination-margin-horizontal` to `0` and use new `@pagination-item-padding-vertical` and `@pagination-item-padding-horizontal`
+
+### Fixed
+
+- Fix lightbox button focus state
+- Fix Slider component transition bug in iOS 14.0
+
+## 3.5.7 (August 27, 2020)
+
+### Fixed
+
+- Fix Switcher component no longer toggles an already active item
+- Fix 'positionAt' function not detecting flip state correctly
+- Fix 'z-index' for stacked Modals
+
+## 3.5.6 (August 13, 2020)
+
+### Changed
+
+- Sticky component uses window.Date instead of window.performance
+- Sticky component with sticky-on-up no longer hides when Dropdown shows
+
+### Fixed
+
+- Fix slidenav color in Lightbox component
+- Fix inverse colors for link toggle in Link component
+- Sticky component remains inactive if hidden
+- Revert dropbar mode `push` is only applied if Navbar is positioned static
+- Fix animations not resolving if user canceled
+
+## 3.5.5 (July 14, 2020)
+
+### Added
+
+- Add list marker utility support for WebKit
+- Add `uk-text-default` to Text component 
+- Add multiple targets to Filter component
+
+### Fixed
+
+- Updates no longer throw error after too many recursions, but delay into next frame
+- Fix empty slider throws exception
+- Fix pointer events ignored on SVGs in Sortable component
+- Fix Grid component divider rendering
+- Fix `<select>` closes Drop component in hover mode in Firefox 
+
 ## 3.5.4 (June 12, 2020)
 
 ### Added
