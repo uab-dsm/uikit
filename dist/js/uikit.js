@@ -1,9 +1,9 @@
-/*! UIkit 3.5.16 | https://www.getuikit.com | (c) 2014 - 2020 YOOtheme | MIT License */
+/*! uasUIkit 3.5.16 | https://www.getuikit.com | (c) 2014 - 2020 YOOtheme | MIT License */
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define('uikit', factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.UIkit = factory());
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.uasUIkit = factory());
 }(this, (function () { 'use strict';
 
     var objPrototype = Object.prototype;
@@ -503,7 +503,7 @@
                 }
 
                 if (!ctx.id) {
-                    ctx.id = "uk-" + (Date.now()) + i;
+                    ctx.id = "uas-" + (Date.now()) + i;
                     removes.push(function () { return removeAttr(ctx, 'id'); });
                 }
 
@@ -1444,16 +1444,16 @@
         var docEl = document.documentElement;
 
         if (!isIE) {
-            return getStyles(docEl).getPropertyValue(("--uk-" + name));
+            return getStyles(docEl).getPropertyValue(("--uas-" + name));
         }
 
         if (!(name in vars)) {
 
-            /* usage in css: .uk-name:before { content:"xyz" } */
+            /* usage in css: .uas-name:before { content:"xyz" } */
 
             var element = append(docEl, document.createElement('div'));
 
-            addClass(element, ("uk-" + name));
+            addClass(element, ("uas-" + name));
 
             vars[name] = getStyle(element, 'content', ':before').replace(/^["'](.*)["']$/, '$1');
 
@@ -1519,7 +1519,7 @@
                     var type = ref.type;
 
                     clearTimeout(timer);
-                    removeClass(element, 'uk-transition');
+                    removeClass(element, 'uas-transition');
                     css(element, {
                         transitionProperty: '',
                         transitionDuration: '',
@@ -1528,7 +1528,7 @@
                     type === 'transitioncanceled' ? reject() : resolve();
                 }, {self: true});
 
-                addClass(element, 'uk-transition');
+                addClass(element, 'uas-transition');
                 css(element, assign({
                     transitionProperty: Object.keys(props).map(propName).join(','),
                     transitionDuration: (duration + "ms"),
@@ -1554,12 +1554,12 @@
         },
 
         inProgress: function(element) {
-            return hasClass(element, 'uk-transition');
+            return hasClass(element, 'uas-transition');
         }
 
     };
 
-    var animationPrefix = 'uk-animation-';
+    var animationPrefix = 'uas-animation-';
 
     function animate(element, animation, duration, origin, out) {
         if ( duration === void 0 ) duration = 200;
@@ -1587,7 +1587,7 @@
                 addClass(element, animation, animationPrefix + (out ? 'leave' : 'enter'));
 
                 if (startsWith(animation, animationPrefix)) {
-                    addClass(element, origin && ("uk-transform-origin-" + origin), out && (animationPrefix + "reverse"));
+                    addClass(element, origin && ("uas-transform-origin-" + origin), out && (animationPrefix + "reverse"));
                 }
 
             }); }
@@ -2756,11 +2756,11 @@
         getViewport: getViewport
     });
 
-    function globalAPI (UIkit) {
+    function globalAPI (uasUIkit) {
 
-        var DATA = UIkit.data;
+        var DATA = uasUIkit.data;
 
-        UIkit.use = function (plugin) {
+        uasUIkit.use = function (plugin) {
 
             if (plugin.installed) {
                 return;
@@ -2772,17 +2772,17 @@
             return this;
         };
 
-        UIkit.mixin = function (mixin, component) {
-            component = (isString(component) ? UIkit.component(component) : component) || this;
+        uasUIkit.mixin = function (mixin, component) {
+            component = (isString(component) ? uasUIkit.component(component) : component) || this;
             component.options = mergeOptions(component.options, mixin);
         };
 
-        UIkit.extend = function (options) {
+        uasUIkit.extend = function (options) {
 
             options = options || {};
 
             var Super = this;
-            var Sub = function UIkitComponent(options) {
+            var Sub = function uasUIkitComponent(options) {
                 this._init(options);
             };
 
@@ -2796,7 +2796,7 @@
             return Sub;
         };
 
-        UIkit.update = function (element, e) {
+        uasUIkit.update = function (element, e) {
 
             element = element ? toNode(element) : document.body;
 
@@ -2806,7 +2806,7 @@
         };
 
         var container;
-        Object.defineProperty(UIkit, 'container', {
+        Object.defineProperty(uasUIkit, 'container', {
 
             get: function() {
                 return container || document.body;
@@ -2833,9 +2833,9 @@
         }
     }
 
-    function hooksAPI (UIkit) {
+    function hooksAPI (uasUIkit) {
 
-        UIkit.prototype._callHook = function (hook) {
+        uasUIkit.prototype._callHook = function (hook) {
             var this$1 = this;
 
 
@@ -2846,7 +2846,7 @@
             }
         };
 
-        UIkit.prototype._callConnected = function () {
+        uasUIkit.prototype._callConnected = function () {
 
             if (this._connected) {
                 return;
@@ -2868,7 +2868,7 @@
             this._callUpdate();
         };
 
-        UIkit.prototype._callDisconnected = function () {
+        uasUIkit.prototype._callDisconnected = function () {
 
             if (!this._connected) {
                 return;
@@ -2888,7 +2888,7 @@
 
         };
 
-        UIkit.prototype._callUpdate = function (e) {
+        uasUIkit.prototype._callUpdate = function (e) {
             var this$1 = this;
             if ( e === void 0 ) e = 'update';
 
@@ -2939,7 +2939,7 @@
 
         };
 
-        UIkit.prototype._callWatches = function () {
+        uasUIkit.prototype._callWatches = function () {
             var this$1 = this;
 
 
@@ -2989,11 +2989,11 @@
 
     }
 
-    function stateAPI (UIkit) {
+    function stateAPI (uasUIkit) {
 
         var uid = 0;
 
-        UIkit.prototype._init = function (options) {
+        uasUIkit.prototype._init = function (options) {
 
             options = options || {};
             options.data = normalizeData(options, this.constructor.options);
@@ -3013,7 +3013,7 @@
             }
         };
 
-        UIkit.prototype._initData = function () {
+        uasUIkit.prototype._initData = function () {
 
             var ref = this.$options;
             var data = ref.data; if ( data === void 0 ) data = {};
@@ -3023,7 +3023,7 @@
             }
         };
 
-        UIkit.prototype._initMethods = function () {
+        uasUIkit.prototype._initMethods = function () {
 
             var ref = this.$options;
             var methods = ref.methods;
@@ -3035,7 +3035,7 @@
             }
         };
 
-        UIkit.prototype._initComputeds = function () {
+        uasUIkit.prototype._initComputeds = function () {
 
             var ref = this.$options;
             var computed = ref.computed;
@@ -3049,7 +3049,7 @@
             }
         };
 
-        UIkit.prototype._initProps = function (props) {
+        uasUIkit.prototype._initProps = function (props) {
 
             var key;
 
@@ -3069,7 +3069,7 @@
             }
         };
 
-        UIkit.prototype._initEvents = function () {
+        uasUIkit.prototype._initEvents = function () {
             var this$1 = this;
 
 
@@ -3094,12 +3094,12 @@
             }
         };
 
-        UIkit.prototype._unbindEvents = function () {
+        uasUIkit.prototype._unbindEvents = function () {
             this._events.forEach(function (unbind) { return unbind(); });
             delete this._events;
         };
 
-        UIkit.prototype._initObserver = function () {
+        uasUIkit.prototype._initObserver = function () {
             var this$1 = this;
 
 
@@ -3302,15 +3302,15 @@
         }
     }
 
-    function instanceAPI (UIkit) {
+    function instanceAPI (uasUIkit) {
 
-        var DATA = UIkit.data;
+        var DATA = uasUIkit.data;
 
-        UIkit.prototype.$create = function (component, element, data) {
-            return UIkit[component](element, data);
+        uasUIkit.prototype.$create = function (component, element, data) {
+            return uasUIkit[component](element, data);
         };
 
-        UIkit.prototype.$mount = function (el) {
+        uasUIkit.prototype.$mount = function (el) {
 
             var ref = this.$options;
             var name = ref.name;
@@ -3332,12 +3332,12 @@
             }
         };
 
-        UIkit.prototype.$reset = function () {
+        uasUIkit.prototype.$reset = function () {
             this._callDisconnected();
             this._callConnected();
         };
 
-        UIkit.prototype.$destroy = function (removeEl) {
+        uasUIkit.prototype.$destroy = function (removeEl) {
             if ( removeEl === void 0 ) removeEl = false;
 
 
@@ -3366,22 +3366,22 @@
             }
         };
 
-        UIkit.prototype.$emit = function (e) {
+        uasUIkit.prototype.$emit = function (e) {
             this._callUpdate(e);
         };
 
-        UIkit.prototype.$update = function (element, e) {
+        uasUIkit.prototype.$update = function (element, e) {
             if ( element === void 0 ) element = this.$el;
 
-            UIkit.update(element, e);
+            uasUIkit.update(element, e);
         };
 
-        UIkit.prototype.$getComponent = UIkit.getComponent;
+        uasUIkit.prototype.$getComponent = uasUIkit.getComponent;
 
         var names = {};
-        Object.defineProperties(UIkit.prototype, {
+        Object.defineProperties(uasUIkit.prototype, {
 
-            $container: Object.getOwnPropertyDescriptor(UIkit, 'container'),
+            $container: Object.getOwnPropertyDescriptor(uasUIkit, 'container'),
 
             $name: {
 
@@ -3390,7 +3390,7 @@
                     var name = ref.name;
 
                     if (!names[name]) {
-                        names[name] = UIkit.prefix + hyphenate(name);
+                        names[name] = uasUIkit.prefix + hyphenate(name);
                     }
 
                     return names[name];
@@ -3402,13 +3402,13 @@
 
     }
 
-    function componentAPI (UIkit) {
+    function componentAPI (uasUIkit) {
 
-        var DATA = UIkit.data;
+        var DATA = uasUIkit.data;
 
         var components = {};
 
-        UIkit.component = function (name, options) {
+        uasUIkit.component = function (name, options) {
 
             var id = hyphenate(name);
 
@@ -3417,19 +3417,19 @@
             if (!options) {
 
                 if (isPlainObject(components[name])) {
-                    components[name] = UIkit.extend(components[name]);
+                    components[name] = uasUIkit.extend(components[name]);
                 }
 
                 return components[name];
 
             }
 
-            UIkit[name] = function (element, data) {
+            uasUIkit[name] = function (element, data) {
                 var i = arguments.length, argsArray = Array(i);
                 while ( i-- ) argsArray[i] = arguments[i];
 
 
-                var component = UIkit.component(name);
+                var component = uasUIkit.component(name);
 
                 return component.options.functional
                     ? new component({data: isPlainObject(element) ? element : [].concat( argsArray )})
@@ -3437,7 +3437,7 @@
 
                 function init(element) {
 
-                    var instance = UIkit.getComponent(element, name);
+                    var instance = uasUIkit.getComponent(element, name);
 
                     if (instance) {
                         if (!data) {
@@ -3458,20 +3458,20 @@
             opt.name = name;
 
             if (opt.install) {
-                opt.install(UIkit, opt, name);
+                opt.install(uasUIkit, opt, name);
             }
 
-            if (UIkit._initialized && !opt.functional) {
-                fastdom.read(function () { return UIkit[name](("[uk-" + id + "],[data-uk-" + id + "]")); });
+            if (uasUIkit._initialized && !opt.functional) {
+                fastdom.read(function () { return uasUIkit[name](("[uas-" + id + "],[data-uas-" + id + "]")); });
             }
 
             return components[name] = isPlainObject(options) ? opt : options;
         };
 
-        UIkit.getComponents = function (element) { return element && element[DATA] || {}; };
-        UIkit.getComponent = function (element, name) { return UIkit.getComponents(element)[name]; };
+        uasUIkit.getComponents = function (element) { return element && element[DATA] || {}; };
+        uasUIkit.getComponent = function (element, name) { return uasUIkit.getComponents(element)[name]; };
 
-        UIkit.connect = function (node) {
+        uasUIkit.connect = function (node) {
 
             if (node[DATA]) {
                 for (var name in node[DATA]) {
@@ -3484,14 +3484,14 @@
                 var name$1 = getComponentName(node.attributes[i].name);
 
                 if (name$1 && name$1 in components) {
-                    UIkit[name$1](node);
+                    uasUIkit[name$1](node);
                 }
 
             }
 
         };
 
-        UIkit.disconnect = function (node) {
+        uasUIkit.disconnect = function (node) {
             for (var name in node[DATA]) {
                 node[DATA][name]._callDisconnected();
             }
@@ -3500,32 +3500,32 @@
     }
 
     function getComponentName(attribute) {
-        return startsWith(attribute, 'uk-') || startsWith(attribute, 'data-uk-')
-            ? camelize(attribute.replace('data-uk-', '').replace('uk-', ''))
+        return startsWith(attribute, 'uas-') || startsWith(attribute, 'data-uas-')
+            ? camelize(attribute.replace('data-uas-', '').replace('uas-', ''))
             : false;
     }
 
-    var UIkit = function (options) {
+    var uasUIkit = function (options) {
         this._init(options);
     };
 
-    UIkit.util = util;
-    UIkit.data = '__uikit__';
-    UIkit.prefix = 'uk-';
-    UIkit.options = {};
-    UIkit.version = '3.5.16';
+    uasUIkit.util = util;
+    uasUIkit.data = '__uikit__';
+    uasUIkit.prefix = 'uas-';
+    uasUIkit.options = {};
+    uasUIkit.version = '3.5.16';
 
-    globalAPI(UIkit);
-    hooksAPI(UIkit);
-    stateAPI(UIkit);
-    componentAPI(UIkit);
-    instanceAPI(UIkit);
+    globalAPI(uasUIkit);
+    hooksAPI(uasUIkit);
+    stateAPI(uasUIkit);
+    componentAPI(uasUIkit);
+    instanceAPI(uasUIkit);
 
-    function Core (UIkit) {
+    function Core (uasUIkit) {
 
         inBrowser && ready(function () {
 
-            UIkit.update();
+            uasUIkit.update();
 
             // throttle 'resize'
             var pendingResize;
@@ -3535,7 +3535,7 @@
                 }
                 pendingResize = true;
                 fastdom.write(function () { return pendingResize = false; });
-                UIkit.update(null, 'resize');
+                uasUIkit.update(null, 'resize');
             };
 
             on(window, 'load resize', handleResize);
@@ -3555,7 +3555,7 @@
                 pending = true;
                 fastdom.write(function () { return pending = false; });
 
-                UIkit.update(null, e.type);
+                uasUIkit.update(null, e.type);
 
             }, {passive: true, capture: true});
 
@@ -3563,7 +3563,7 @@
             on(document, 'animationstart', function (ref) {
                 var target = ref.target;
 
-                if ((css(target, 'animationName') || '').match(/^uk-.*(left|right)/)) {
+                if ((css(target, 'animationName') || '').match(/^uas-.*(left|right)/)) {
 
                     started++;
                     css(document.documentElement, 'overflowX', 'hidden');
@@ -3621,10 +3621,10 @@
                 : 'Down';
     }
 
-    function boot (UIkit) {
+    function boot (uasUIkit) {
 
-        var connect = UIkit.connect;
-        var disconnect = UIkit.disconnect;
+        var connect = uasUIkit.connect;
+        var disconnect = uasUIkit.disconnect;
 
         if (!inBrowser || !window.MutationObserver) {
             return;
@@ -3641,7 +3641,7 @@
             (new MutationObserver(function (mutations) {
                 var updates = [];
                 mutations.forEach(function (mutation) { return applyMutation(mutation, updates); });
-                updates.forEach(function (el) { return UIkit.update(el); });
+                updates.forEach(function (el) { return uasUIkit.update(el); });
             })).observe(document, {
                 childList: true,
                 subtree: true,
@@ -3649,7 +3649,7 @@
                 attributes: true
             });
 
-            UIkit._initialized = true;
+            uasUIkit._initialized = true;
         }
 
         function applyMutation(mutation, updates) {
@@ -3678,16 +3678,16 @@
 
             var name = getComponentName(attributeName);
 
-            if (!name || !(name in UIkit)) {
+            if (!name || !(name in uasUIkit)) {
                 return;
             }
 
             if (hasAttr(target, attributeName)) {
-                UIkit[name](target);
+                uasUIkit[name](target);
                 return true;
             }
 
-            var component = UIkit.getComponent(target, name);
+            var component = uasUIkit.getComponent(target, name);
 
             if (component) {
                 component.$destroy();
@@ -3805,7 +3805,7 @@
                 show = isBoolean(show)
                     ? show
                     : Animation.inProgress(el)
-                        ? hasClass(el, 'uk-animation-leave')
+                        ? hasClass(el, 'uas-animation-leave')
                         : Transition.inProgress(el)
                             ? el.style.height === '0px'
                             : !this.isToggled(el);
@@ -3940,9 +3940,9 @@
             animation: [true],
             collapsible: true,
             multiple: false,
-            clsOpen: 'uk-open',
-            toggle: '> .uk-accordion-title',
-            content: '> .uk-accordion-content',
+            clsOpen: 'uas-open',
+            toggle: '> .uas-accordion-title',
+            content: '> .uas-accordion-content',
             transition: 'ease',
             offset: 0
         },
@@ -4069,7 +4069,7 @@
 
         data: {
             animation: [true],
-            selClose: '.uk-alert-close',
+            selClose: '.uas-alert-close',
             duration: 150,
             hideProps: assign({opacity: 0}, Togglable.data.hideProps)
         },
@@ -4335,8 +4335,8 @@
             delayShow: 0,
             delayHide: 800,
             clsDrop: false,
-            animation: ['uk-animation-fade'],
-            cls: 'uk-open'
+            animation: ['uas-animation-fade'],
+            cls: 'uas-open'
         },
 
         computed: {
@@ -4350,7 +4350,7 @@
             clsDrop: function(ref) {
                 var clsDrop = ref.clsDrop;
 
-                return clsDrop || ("uk-" + (this.$options.name));
+                return clsDrop || ("uas-" + (this.$options.name));
             },
 
             clsPos: function() {
@@ -4852,8 +4852,8 @@
         },
 
         data: {
-            margin: 'uk-margin-small-top',
-            firstColumn: 'uk-first-column'
+            margin: 'uas-margin-small-top',
+            firstColumn: 'uas-first-column'
         },
 
         update: {
@@ -4992,14 +4992,14 @@
         },
 
         data: {
-            margin: 'uk-grid-margin',
-            clsStack: 'uk-grid-stack',
+            margin: 'uas-grid-margin',
+            clsStack: 'uas-grid-stack',
             masonry: false,
             parallax: 0
         },
 
         connected: function() {
-            this.masonry && addClass(this.$el, 'uk-flex-top uk-flex-wrap-top');
+            this.masonry && addClass(this.$el, 'uas-flex-top uas-flex-wrap-top');
         },
 
         update: [
@@ -5407,7 +5407,7 @@
         },
 
         beforeConnect: function() {
-            this.class += ' uk-svg';
+            this.class += ' uas-svg';
         },
 
         connected: function() {
@@ -5580,7 +5580,7 @@
         var length = getMaxPathLength(el);
 
         if (length) {
-            el.style.setProperty('--uk-animation-stroke', length);
+            el.style.setProperty('--uas-animation-stroke', length);
         }
 
     }
@@ -5686,7 +5686,7 @@
         isIcon: true,
 
         beforeConnect: function() {
-            addClass(this.$el, 'uk-icon');
+            addClass(this.$el, 'uas-icon');
         },
 
         methods: {
@@ -5727,7 +5727,7 @@
         extends: IconComponent,
 
         beforeConnect: function() {
-            addClass(this.$el, 'uk-slidenav');
+            addClass(this.$el, 'uas-slidenav');
         },
 
         computed: {
@@ -5735,7 +5735,7 @@
             icon: function(ref, $el) {
                 var icon = ref.icon;
 
-                return hasClass($el, 'uk-slidenav-large')
+                return hasClass($el, 'uas-slidenav-large')
                     ? (icon + "-large")
                     : icon;
             }
@@ -5753,9 +5753,9 @@
             icon: function(ref, $el) {
                 var icon = ref.icon;
 
-                return hasClass($el, 'uk-search-icon') && parents($el, '.uk-search-large').length
+                return hasClass($el, 'uas-search-icon') && parents($el, '.uas-search-large').length
                     ? 'search-large'
-                    : parents($el, '.uk-search-navbar').length
+                    : parents($el, '.uas-search-navbar').length
                         ? 'search-navbar'
                         : icon;
             }
@@ -5771,7 +5771,7 @@
         computed: {
 
             icon: function() {
-                return ("close-" + (hasClass(this.$el, 'uk-close-large') ? 'large' : 'icon'));
+                return ("close-" + (hasClass(this.$el, 'uas-close-large') ? 'large' : 'icon'));
             }
 
         }
@@ -5791,8 +5791,8 @@
     };
 
     var parsed = {};
-    function install(UIkit) {
-        UIkit.icon.add = function (name, svg) {
+    function install(uasUIkit) {
+        uasUIkit.icon.add = function (name, svg) {
             var obj;
 
 
@@ -5802,8 +5802,8 @@
                 delete parsed[name];
             });
 
-            if (UIkit._initialized) {
-                apply(document.body, function (el) { return each(UIkit.getComponents(el), function (cmp) {
+            if (uasUIkit._initialized) {
+                apply(document.body, function (el) { return each(uasUIkit.getComponents(el), function (cmp) {
                         cmp.$options.isIcon && cmp.icon in added && cmp.$reset();
                     }); }
                 );
@@ -6137,8 +6137,8 @@
 
         data: {
             fill: '',
-            clsWrapper: 'uk-leader-fill',
-            clsHide: 'uk-leader-hide',
+            clsWrapper: 'uas-leader-fill',
+            clsHide: 'uas-leader-hide',
             attrFill: 'data-fill'
         },
 
@@ -6235,7 +6235,7 @@
         },
 
         data: {
-            cls: 'uk-open',
+            cls: 'uas-open',
             escClose: true,
             bgClose: true,
             overlay: true,
@@ -6468,9 +6468,9 @@
         mixins: [Modal],
 
         data: {
-            clsPage: 'uk-modal-page',
-            selPanel: '.uk-modal-dialog',
-            selClose: '.uk-modal-close, .uk-modal-close-default, .uk-modal-close-outside, .uk-modal-close-full'
+            clsPage: 'uas-modal-page',
+            selPanel: '.uas-modal-dialog',
+            selClose: '.uas-modal-close, .uas-modal-close-default, .uas-modal-close-outside, .uas-modal-close-full'
         },
 
         events: [
@@ -6482,8 +6482,8 @@
 
                 handler: function() {
 
-                    if (hasClass(this.panel, 'uk-margin-auto-vertical')) {
-                        addClass(this.$el, 'uk-flex');
+                    if (hasClass(this.panel, 'uas-margin-auto-vertical')) {
+                        addClass(this.$el, 'uas-flex');
                     } else {
                         css(this.$el, 'display', 'block');
                     }
@@ -6500,7 +6500,7 @@
                 handler: function() {
 
                     css(this.$el, 'display', '');
-                    removeClass(this.$el, 'uk-flex');
+                    removeClass(this.$el, 'uas-flex');
 
                 }
             }
@@ -6516,7 +6516,7 @@
         modal.dialog = function (content, options) {
 
             var dialog = modal(
-                ("<div class=\"uk-modal\"> <div class=\"uk-modal-dialog\">" + content + "</div> </div>"),
+                ("<div class=\"uas-modal\"> <div class=\"uas-modal-dialog\">" + content + "</div> </div>"),
                 options
             );
 
@@ -6534,7 +6534,7 @@
                 function (ref) {
                     var labels = ref.labels;
 
-                    return ("<div class=\"uk-modal-body\">" + (isString(message) ? message : html(message)) + "</div> <div class=\"uk-modal-footer uk-text-right\"> <button class=\"uk-button uk-button-primary uk-modal-close\" autofocus>" + (labels.ok) + "</button> </div>");
+                    return ("<div class=\"uas-modal-body\">" + (isString(message) ? message : html(message)) + "</div> <div class=\"uas-modal-footer uas-text-right\"> <button class=\"uas-button uas-button-primary uas-modal-close\" autofocus>" + (labels.ok) + "</button> </div>");
             },
                 options,
                 function (deferred) { return deferred.resolve(); }
@@ -6546,7 +6546,7 @@
                 function (ref) {
                     var labels = ref.labels;
 
-                    return ("<form> <div class=\"uk-modal-body\">" + (isString(message) ? message : html(message)) + "</div> <div class=\"uk-modal-footer uk-text-right\"> <button class=\"uk-button uk-button-default uk-modal-close\" type=\"button\">" + (labels.cancel) + "</button> <button class=\"uk-button uk-button-primary\" autofocus>" + (labels.ok) + "</button> </div> </form>");
+                    return ("<form> <div class=\"uas-modal-body\">" + (isString(message) ? message : html(message)) + "</div> <div class=\"uas-modal-footer uas-text-right\"> <button class=\"uas-button uas-button-default uas-modal-close\" type=\"button\">" + (labels.cancel) + "</button> <button class=\"uas-button uas-button-primary\" autofocus>" + (labels.ok) + "</button> </div> </form>");
             },
                 options,
                 function (deferred) { return deferred.reject(); }
@@ -6558,7 +6558,7 @@
                 function (ref) {
                     var labels = ref.labels;
 
-                    return ("<form class=\"uk-form-stacked\"> <div class=\"uk-modal-body\"> <label>" + (isString(message) ? message : html(message)) + "</label> <input class=\"uk-input\" value=\"" + (value || '') + "\" autofocus> </div> <div class=\"uk-modal-footer uk-text-right\"> <button class=\"uk-button uk-button-default uk-modal-close\" type=\"button\">" + (labels.cancel) + "</button> <button class=\"uk-button uk-button-primary\">" + (labels.ok) + "</button> </div> </form>");
+                    return ("<form class=\"uas-form-stacked\"> <div class=\"uas-modal-body\"> <label>" + (isString(message) ? message : html(message)) + "</label> <input class=\"uas-input\" value=\"" + (value || '') + "\" autofocus> </div> <div class=\"uas-modal-footer uas-text-right\"> <button class=\"uas-button uas-button-default uas-modal-close\" type=\"button\">" + (labels.cancel) + "</button> <button class=\"uas-button uas-button-primary\">" + (labels.ok) + "</button> </div> </form>");
             },
                 options,
                 function (deferred) { return deferred.resolve(null); },
@@ -6601,7 +6601,7 @@
         extends: Accordion,
 
         data: {
-            targets: '> .uk-parent',
+            targets: '> .uas-parent',
             toggle: '> a',
             content: '> ul'
         }
@@ -6629,9 +6629,9 @@
         },
 
         data: {
-            dropdown: '.uk-navbar-nav > li',
+            dropdown: '.uas-navbar-nav > li',
             align: !isRtl ? 'left' : 'right',
-            clsDrop: 'uk-navbar-dropdown',
+            clsDrop: 'uas-navbar-dropdown',
             mode: undefined,
             offset: undefined,
             delayShow: undefined,
@@ -6644,7 +6644,7 @@
             dropbarAnchor: false,
             duration: 200,
             forceHeight: true,
-            selMinHeight: '.uk-navbar-nav > li > a, .uk-navbar-item, .uk-navbar-toggle'
+            selMinHeight: '.uas-navbar-nav > li > a, .uas-navbar-item, .uas-navbar-toggle'
         },
 
         computed: {
@@ -6678,14 +6678,14 @@
                         return null;
                     }
 
-                    dropbar = this._dropbar || query(dropbar, this.$el) || $('+ .uk-navbar-dropbar', this.$el);
+                    dropbar = this._dropbar || query(dropbar, this.$el) || $('+ .uas-navbar-dropbar', this.$el);
 
                     return dropbar ? dropbar : (this._dropbar = $('<div></div>'));
 
                 },
 
                 watch: function(dropbar) {
-                    addClass(dropbar, 'uk-navbar-dropbar');
+                    addClass(dropbar, 'uas-navbar-dropbar');
                 },
 
                 immediate: true
@@ -6792,7 +6792,7 @@
                     }
 
                     if (this.dropbarMode === 'slide') {
-                        addClass(this.dropbar, 'uk-navbar-dropbar-slide');
+                        addClass(this.dropbar, 'uas-navbar-dropbar-slide');
                     }
 
                     this.clsDrop && addClass($el, ((this.clsDrop) + "-dropbar"));
@@ -6904,15 +6904,15 @@
             mode: 'slide',
             flip: false,
             overlay: false,
-            clsPage: 'uk-offcanvas-page',
-            clsContainer: 'uk-offcanvas-container',
-            selPanel: '.uk-offcanvas-bar',
-            clsFlip: 'uk-offcanvas-flip',
-            clsContainerAnimation: 'uk-offcanvas-container-animation',
-            clsSidebarAnimation: 'uk-offcanvas-bar-animation',
-            clsMode: 'uk-offcanvas',
-            clsOverlay: 'uk-offcanvas-overlay',
-            selClose: '.uk-offcanvas-close',
+            clsPage: 'uas-offcanvas-page',
+            clsContainer: 'uas-offcanvas-container',
+            selPanel: '.uas-offcanvas-bar',
+            clsFlip: 'uas-offcanvas-flip',
+            clsContainerAnimation: 'uas-offcanvas-container-animation',
+            clsSidebarAnimation: 'uas-offcanvas-bar-animation',
+            clsMode: 'uas-offcanvas',
+            clsOverlay: 'uas-offcanvas-overlay',
+            selClose: '.uas-offcanvas-close',
             container: false
         },
 
@@ -7153,8 +7153,8 @@
         },
 
         data: {
-            selContainer: '.uk-modal',
-            selContent: '.uk-modal-dialog'
+            selContainer: '.uas-modal',
+            selContent: '.uas-modal-dialog'
         },
 
         computed: {
@@ -7212,7 +7212,7 @@
         props: ['width', 'height'],
 
         connected: function() {
-            addClass(this.$el, 'uk-responsive-width');
+            addClass(this.$el, 'uas-responsive-width');
         },
 
         update: {
@@ -7302,7 +7302,7 @@
             offsetLeft: 0,
             repeat: false,
             delay: 0,
-            inViewClass: 'uk-scrollspy-inview'
+            inViewClass: 'uas-scrollspy-inview'
         }); },
 
         computed: {
@@ -7343,7 +7343,7 @@
                     this.elements.forEach(function (el) {
 
                         if (!el[stateKey$1]) {
-                            el[stateKey$1] = {cls: data(el, 'uk-scrollspy-class') || this$1.cls};
+                            el[stateKey$1] = {cls: data(el, 'uas-scrollspy-class') || this$1.cls};
                         }
 
                         el[stateKey$1].show = isInView(el, this$1.offsetTop, this$1.offsetLeft);
@@ -7423,7 +7423,7 @@
         },
 
         data: {
-            cls: 'uk-active',
+            cls: 'uas-active',
             closest: false,
             scroll: false,
             overflow: true,
@@ -7547,10 +7547,10 @@
             bottom: false,
             offset: 0,
             animation: '',
-            clsActive: 'uk-active',
+            clsActive: 'uas-active',
             clsInactive: '',
-            clsFixed: 'uk-sticky-fixed',
-            clsBelow: 'uk-sticky-below',
+            clsFixed: 'uas-sticky-fixed',
+            clsBelow: 'uas-sticky-below',
             selTarget: '',
             widthElement: false,
             showOnUp: false,
@@ -7598,7 +7598,7 @@
         },
 
         connected: function() {
-            this.placeholder = $('+ .uk-sticky-placeholder', this.$el) || $('<div class="uk-sticky-placeholder"></div>');
+            this.placeholder = $('+ .uas-sticky-placeholder', this.$el) || $('<div class="uas-sticky-placeholder"></div>');
             this.isFixed = false;
             this.isActive = false;
         },
@@ -7885,13 +7885,13 @@
         },
 
         data: {
-            connect: '~.uk-switcher',
+            connect: '~.uas-switcher',
             toggle: '> * > :first-child',
             active: 0,
             swiping: true,
-            cls: 'uk-active',
-            clsContainer: 'uk-switcher',
-            attrItem: 'uk-switcher-item'
+            cls: 'uas-active',
+            clsContainer: 'uas-switcher',
+            attrItem: 'uas-switcher-item'
         },
 
         computed: {
@@ -7925,7 +7925,7 @@
                 get: function(ref, $el) {
                     var toggle = ref.toggle;
 
-                    return $$(toggle, $el).filter(function (el) { return !matches(el, '.uk-disabled *, .uk-disabled, [disabled]'); });
+                    return $$(toggle, $el).filter(function (el) { return !matches(el, '.uas-disabled *, .uas-disabled, [disabled]'); });
                 },
 
                 watch: function(toggles) {
@@ -8052,15 +8052,15 @@
 
         data: {
             media: 960,
-            attrItem: 'uk-tab-item'
+            attrItem: 'uas-tab-item'
         },
 
         connected: function() {
 
-            var cls = hasClass(this.$el, 'uk-tab-left')
-                ? 'uk-tab-left'
-                : hasClass(this.$el, 'uk-tab-right')
-                    ? 'uk-tab-right'
+            var cls = hasClass(this.$el, 'uas-tab-left')
+                ? 'uas-tab-left'
+                : hasClass(this.$el, 'uas-tab-right')
+                    ? 'uas-tab-right'
                     : false;
 
             if (cls) {
@@ -8253,13 +8253,13 @@
     });
 
     // register components
-    each(components, function (component, name) { return UIkit.component(name, component); }
+    each(components, function (component, name) { return uasUIkit.component(name, component); }
     );
 
     // core functionality
-    UIkit.use(Core);
+    uasUIkit.use(Core);
 
-    boot(UIkit);
+    boot(uasUIkit);
 
     var countdown = {
 
@@ -8272,7 +8272,7 @@
 
         data: {
             date: '',
-            clsWrapper: '.uk-countdown-%unit%'
+            clsWrapper: '.uas-countdown-%unit%'
         },
 
         computed: {
@@ -8427,7 +8427,7 @@
         };
     }
 
-    var targetClass = 'uk-animation-target';
+    var targetClass = 'uas-animation-target';
 
     var Animate = {
 
@@ -8584,8 +8584,8 @@
         data: {
             target: null,
             selActive: false,
-            attrItem: 'uk-filter-control',
-            cls: 'uk-active',
+            attrItem: 'uas-filter-control',
+            cls: 'uas-active',
             animation: 250
         },
 
@@ -9301,7 +9301,7 @@
                     html(this.nav, this.slides.map(function (_, i) { return ("<li " + (this$1.attrItem) + "=\"" + i + "\"><a href></a></li>"); }).join(''));
                 }
 
-                toggleClass($$(this.selNavItem, this.$el).concat(this.nav), 'uk-hidden', !this.maxIndex);
+                toggleClass($$(this.selNavItem, this.$el).concat(this.nav), 'uas-hidden', !this.maxIndex);
 
                 this.updateNav();
 
@@ -9349,7 +9349,7 @@
                     var cmd = data(el, this$1.attrItem);
 
                     toggleClass(el, this$1.clsActive, toNumber(cmd) === i);
-                    toggleClass(el, 'uk-invisible', this$1.finite && (cmd === 'previous' && i === 0 || cmd === 'next' && i >= this$1.maxIndex));
+                    toggleClass(el, 'uas-invisible', this$1.finite && (cmd === 'previous' && i === 0 || cmd === 'next' && i >= this$1.maxIndex));
                 });
 
             }
@@ -9379,7 +9379,7 @@
             prevIndex: -1,
             stack: [],
             percent: 0,
-            clsActive: 'uk-active',
+            clsActive: 'uas-active',
             clsActivated: false,
             Transitioner: false,
             transitionOptions: {}
@@ -9622,7 +9622,7 @@
 
         data: {
             animation: 'slide',
-            clsActivated: 'uk-transition-active',
+            clsActivated: 'uas-transition-active',
             Animations: Animations,
             Transitioner: Transitioner
         },
@@ -9690,16 +9690,16 @@
             videoAutoplay: false,
             delayControls: 3000,
             items: [],
-            cls: 'uk-open',
-            clsPage: 'uk-lightbox-page',
-            selList: '.uk-lightbox-items',
-            attrItem: 'uk-lightbox-item',
-            selClose: '.uk-close-large',
-            selCaption: '.uk-lightbox-caption',
+            cls: 'uas-open',
+            clsPage: 'uas-lightbox-page',
+            selList: '.uas-lightbox-items',
+            attrItem: 'uas-lightbox-item',
+            selClose: '.uas-close-large',
+            selCaption: '.uas-lightbox-caption',
             pauseOnHover: false,
             velocity: 2,
             Animations: Animations$1,
-            template: "<div class=\"uk-lightbox uk-overflow-hidden\"> <ul class=\"uk-lightbox-items\"></ul> <div class=\"uk-lightbox-toolbar uk-position-top uk-text-right uk-transition-slide-top uk-transition-opaque\"> <button class=\"uk-lightbox-toolbar-icon uk-close-large\" type=\"button\" uk-close></button> </div> <a class=\"uk-lightbox-button uk-position-center-left uk-position-medium uk-transition-fade\" href uk-slidenav-previous uk-lightbox-item=\"previous\"></a> <a class=\"uk-lightbox-button uk-position-center-right uk-position-medium uk-transition-fade\" href uk-slidenav-next uk-lightbox-item=\"next\"></a> <div class=\"uk-lightbox-toolbar uk-lightbox-caption uk-position-bottom uk-text-center uk-transition-slide-bottom uk-transition-opaque\"></div> </div>"
+            template: "<div class=\"uas-lightbox uas-overflow-hidden\"> <ul class=\"uas-lightbox-items\"></ul> <div class=\"uas-lightbox-toolbar uas-position-top uas-text-right uas-transition-slide-top uas-transition-opaque\"> <button class=\"uas-lightbox-toolbar-icon uas-close-large\" type=\"button\" uas-close></button> </div> <a class=\"uas-lightbox-button uas-position-center-left uas-position-medium uas-transition-fade\" href uas-slidenav-previous uas-lightbox-item=\"previous\"></a> <a class=\"uas-lightbox-button uas-position-center-right uas-position-medium uas-transition-fade\" href uas-slidenav-next uas-lightbox-item=\"next\"></a> <div class=\"uas-lightbox-toolbar uas-lightbox-caption uas-position-bottom uas-text-center uas-transition-slide-bottom uas-transition-opaque\"></div> </div>"
         }); },
 
         created: function() {
@@ -9717,7 +9717,7 @@
             caption: function(ref, $el) {
                 var selCaption = ref.selCaption;
 
-                return $('.uk-lightbox-caption', $el);
+                return $('.uas-lightbox-caption', $el);
             }
 
         },
@@ -9880,7 +9880,7 @@
                     var poster = item.poster;
                     var attrs = item.attrs; if ( attrs === void 0 ) attrs = {};
 
-                    this.setItem(item, '<span uk-spinner></span>');
+                    this.setItem(item, '<span uas-spinner></span>');
 
                     if (!src) {
                         return;
@@ -9892,8 +9892,8 @@
                         allow: 'autoplay',
                         allowfullscreen: '',
                         style: 'max-width: 100%; box-sizing: border-box;',
-                        'uk-responsive': '',
-                        'uk-video': ("" + (this.videoAutoplay))
+                        'uas-responsive': '',
+                        'uas-video': ("" + (this.videoAutoplay))
                     };
 
                     // Image
@@ -9917,7 +9917,7 @@
                             poster: poster,
                             controls: '',
                             playsinline: '',
-                            'uk-video': ("" + (this.videoAutoplay))
+                            'uas-video': ("" + (this.videoAutoplay))
                         }, attrs));
 
                         on(video, 'loadedmetadata', function () {
@@ -9933,7 +9933,7 @@
                             src: src,
                             frameborder: '0',
                             allowfullscreen: '',
-                            class: 'uk-lightbox-iframe'
+                            class: 'uas-lightbox-iframe'
                         }, attrs)));
 
                     // YouTube
@@ -10002,7 +10002,7 @@
             },
 
             setError: function(item) {
-                this.setItem(item, '<span uk-icon="icon: bolt; ratio: 2"></span>');
+                this.setItem(item, '<span uas-icon="icon: bolt; ratio: 2"></span>');
             },
 
             showControls: function() {
@@ -10010,12 +10010,12 @@
                 clearTimeout(this.controlsTimer);
                 this.controlsTimer = setTimeout(this.hideControls, this.delayControls);
 
-                addClass(this.$el, 'uk-active', 'uk-transition-active');
+                addClass(this.$el, 'uas-active', 'uas-transition-active');
 
             },
 
             hideControls: function() {
-                removeClass(this.$el, 'uk-active', 'uk-transition-active');
+                removeClass(this.$el, 'uas-active', 'uas-transition-active');
             }
 
         }
@@ -10065,7 +10065,7 @@
                 name: 'click',
 
                 delegate: function() {
-                    return ((this.toggle) + ":not(.uk-disabled)");
+                    return ((this.toggle) + ":not(.uas-disabled)");
                 },
 
                 handler: function(e) {
@@ -10113,15 +10113,15 @@
 
     };
 
-    function install$2(UIkit, Lightbox) {
+    function install$2(uasUIkit, Lightbox) {
 
-        if (!UIkit.lightboxPanel) {
-            UIkit.component('lightboxPanel', LightboxPanel);
+        if (!uasUIkit.lightboxPanel) {
+            uasUIkit.component('lightboxPanel', LightboxPanel);
         }
 
         assign(
             Lightbox.props,
-            UIkit.component('lightboxPanel').options.props
+            uasUIkit.component('lightboxPanel').options.props
         );
 
     }
@@ -10153,9 +10153,9 @@
             timeout: 5000,
             group: null,
             pos: 'top-center',
-            clsContainer: 'uk-notification',
-            clsClose: 'uk-notification-close',
-            clsMsg: 'uk-notification-message'
+            clsContainer: 'uas-notification',
+            clsClose: 'uas-notification-close',
+            clsMsg: 'uas-notification-message'
         },
 
         install: install$3,
@@ -10182,7 +10182,7 @@
                 || append(this.$container, ("<div class=\"" + (this.clsContainer) + " " + (this.clsContainer) + "-" + (this.pos) + "\" style=\"display: block\"></div>"));
 
             this.$mount(append(container,
-                ("<div class=\"" + (this.clsMsg) + (this.status ? (" " + (this.clsMsg) + "-" + (this.status)) : '') + "\"> <a href class=\"" + (this.clsClose) + "\" data-uk-close></a> <div>" + (this.message) + "</div> </div>")
+                ("<div class=\"" + (this.clsMsg) + (this.status ? (" " + (this.clsMsg) + "-" + (this.status)) : '') + "\"> <a href class=\"" + (this.clsClose) + "\" data-uas-close></a> <div>" + (this.message) + "</div> </div>")
             ));
 
         },
@@ -10257,10 +10257,10 @@
 
     };
 
-    function install$3(UIkit) {
-        UIkit.notification.closeAll = function (group, immediate) {
+    function install$3(uasUIkit) {
+        uasUIkit.notification.closeAll = function (group, immediate) {
             apply(document.body, function (el) {
-                var notification = UIkit.getComponent(el, 'notification');
+                var notification = uasUIkit.getComponent(el, 'notification');
                 if (notification && (!group || group === notification.group)) {
                     notification.close(immediate);
                 }
@@ -10901,10 +10901,10 @@
         data: {
             center: false,
             sets: false,
-            attrItem: 'uk-slider-item',
-            selList: '.uk-slider-items',
-            selNav: '.uk-slider-nav',
-            clsContainer: 'uk-slider-container',
+            attrItem: 'uas-slider-item',
+            selList: '.uas-slider-items',
+            selNav: '.uas-slider-nav',
+            clsContainer: 'uas-slider-container',
             Transitioner: Transitioner$1
         },
 
@@ -11010,7 +11010,7 @@
 
                 $$(("[" + (this.attrItem) + "],[data-" + (this.attrItem) + "]"), this.$el).forEach(function (el) {
                     var index = data(el, this$1.attrItem);
-                    this$1.maxIndex && toggleClass(el, 'uk-hidden', isNumeric(index) && (this$1.sets && !includes(this$1.sets, toFloat(index)) || index > this$1.maxIndex));
+                    this$1.maxIndex && toggleClass(el, 'uas-hidden', isNumeric(index) && (this$1.sets && !includes(this$1.sets, toFloat(index)) || index > this$1.maxIndex));
                 });
 
                 if (this.length && !this.dragging && !this.stack.length) {
@@ -11392,9 +11392,9 @@
             ratio: '16:9',
             minHeight: false,
             maxHeight: false,
-            selList: '.uk-slideshow-items',
-            attrItem: 'uk-slideshow-item',
-            selNav: '.uk-slideshow-nav',
+            selList: '.uas-slideshow-items',
+            attrItem: 'uas-slideshow-item',
+            selNav: '.uas-slideshow-nav',
             Animations: Animations$2
         },
 
@@ -11452,13 +11452,13 @@
         data: {
             group: false,
             threshold: 5,
-            clsItem: 'uk-sortable-item',
-            clsPlaceholder: 'uk-sortable-placeholder',
-            clsDrag: 'uk-sortable-drag',
-            clsDragState: 'uk-drag',
-            clsBase: 'uk-sortable',
-            clsNoDrag: 'uk-sortable-nodrag',
-            clsEmpty: 'uk-sortable-empty',
+            clsItem: 'uas-sortable-item',
+            clsPlaceholder: 'uas-sortable-placeholder',
+            clsDrag: 'uas-sortable-drag',
+            clsDragState: 'uas-drag',
+            clsBase: 'uas-sortable',
+            clsNoDrag: 'uas-sortable-nodrag',
+            clsEmpty: 'uas-sortable-empty',
             clsCustom: '',
             handle: false,
             pos: {}
@@ -11877,10 +11877,10 @@
             pos: 'top',
             title: '',
             delay: 0,
-            animation: ['uk-animation-scale-up'],
+            animation: ['uas-animation-scale-up'],
             duration: 100,
-            cls: 'uk-active',
-            clsPos: 'uk-tooltip'
+            cls: 'uas-active',
+            clsPos: 'uas-tooltip'
         },
 
         beforeConnect: function() {
@@ -12010,7 +12010,7 @@
 
         data: {
             allow: false,
-            clsDragover: 'uk-dragover',
+            clsDragover: 'uas-dragover',
             concurrent: 1,
             maxSize: 0,
             method: 'POST',
@@ -12208,9 +12208,9 @@
         Upload: upload
     });
 
-    each(components$1, function (component, name) { return UIkit.component(name, component); }
+    each(components$1, function (component, name) { return uasUIkit.component(name, component); }
     );
 
-    return UIkit;
+    return uasUIkit;
 
 })));
